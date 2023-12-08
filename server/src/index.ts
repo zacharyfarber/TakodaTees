@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 
+import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
 import printfulRoutes from './routes/printfulRoutes';
 
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5000'] }));
 
 app.use('/auth', authRoutes);
+app.use('/admin', adminRoutes);
 app.use('/printful', printfulRoutes);
 
 const PORT = process.env.PORT || 5000;

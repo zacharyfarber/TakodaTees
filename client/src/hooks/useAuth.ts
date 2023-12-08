@@ -22,6 +22,16 @@ function useAuth() {
     setError(message);
   };
 
+  const login = (token: string) => {
+    Cookies.set('token', token, { expires: 1 });
+    setAuthenticated(true);
+  };
+
+  const logout = () => {
+    Cookies.remove('token');
+    setAuthenticated(false);
+  };
+
   useEffect(() => {
     const checkAuth = async () => {
       setIsLoading(true);
@@ -47,16 +57,6 @@ function useAuth() {
 
     checkAuth();
   }, [authenticated, navigate]);
-
-  const login = (token: string) => {
-    Cookies.set('token', token, { expires: 1 });
-    setAuthenticated(true);
-  };
-
-  const logout = () => {
-    Cookies.remove('token');
-    setAuthenticated(false);
-  };
 
   return { isLoading, error, authenticated, login, logout };
 }
