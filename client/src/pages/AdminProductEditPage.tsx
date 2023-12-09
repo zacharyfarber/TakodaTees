@@ -3,7 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { getDrops, getProduct, updateProductData } from '../apis/adminApi';
+import {
+  getDrops,
+  getProduct,
+  updateProductData,
+  updateProductDrop
+} from '../apis/adminApi';
 import { Drop, Product, ProductData, Variant } from '../types';
 
 function AdminProductEditPage() {
@@ -69,10 +74,53 @@ function AdminProductEditPage() {
             ...prev,
             dataForm: { pending: false, success: true }
           }));
-        });
 
-        queryClient.invalidateQueries({
-          queryKey: [`product-${productId}-admin`]
+          queryClient.invalidateQueries({
+            queryKey: [`product-${productId}-admin`]
+          });
+        });
+      }
+    }
+  };
+
+  const handleUpdateProductDrop = async () => {
+    if (formsSubmitted.dropForm.pending) {
+      if (productDataErrors.drop) {
+        setFormsSubmitted((prev) => ({
+          ...prev,
+          dropForm: { pending: false, success: false }
+        }));
+      } else {
+        if (
+          !productData.name ||
+          !productData.price ||
+          Object.keys(productData.colors).some(
+            (color) => !productData.colors[color]
+          ) ||
+          !productData.sizes.length ||
+          !productData.description ||
+          !productData.details ||
+          !productData.category ||
+          !productData.keywords ||
+          !productData.drop
+        ) {
+          setProductDataErrors((prev) => ({
+            ...prev,
+            drop: 'Product data is required'
+          }));
+
+          return;
+        }
+
+        updateProductDrop(productId as string, productData.drop).then(() => {
+          setFormsSubmitted((prev) => ({
+            ...prev,
+            dropForm: { pending: false, success: true }
+          }));
+
+          queryClient.invalidateQueries({
+            queryKey: [`product-${productId}-admin`]
+          });
         });
       }
     }
@@ -130,6 +178,39 @@ function AdminProductEditPage() {
     setFormsSubmitted((prev) => ({
       ...prev,
       dataForm: { pending: true, success: false }
+    }));
+  };
+
+  const checkProductDropErrors = () => {
+    const errors: {
+      name: string;
+      price: string;
+      colors: string;
+      sizes: string;
+      description: string;
+      details: string;
+      category: string;
+      keywords: string;
+      drop: string;
+    } = {
+      name: '',
+      price: '',
+      colors: '',
+      sizes: '',
+      description: '',
+      details: '',
+      category: '',
+      keywords: '',
+      drop: ''
+    };
+
+    if (!productData.drop) errors.drop = 'Drop is required';
+
+    setProductDataErrors(() => errors);
+
+    setFormsSubmitted((prev) => ({
+      ...prev,
+      dropForm: { pending: true, success: false }
     }));
   };
 
@@ -220,6 +301,10 @@ function AdminProductEditPage() {
   useEffect(() => {
     handleUpdateProductData();
   }, [formsSubmitted.dataForm.pending]);
+
+  useEffect(() => {
+    handleUpdateProductDrop();
+  }, [formsSubmitted.dropForm.pending]);
 
   if (isLoadingProduct || isLoadingDrops) return <p>Loading...</p>;
 
@@ -477,7 +562,7 @@ function AdminProductEditPage() {
           ))}
         </select>
 
-        <button onClick={checkProductDataErrors}>Update Product Drop</button>
+        <button onClick={checkProductDropErrors}>Update Product Drop</button>
 
         {productDataErrors.drop ? <p>{productDataErrors.drop}</p> : null}
       </div>

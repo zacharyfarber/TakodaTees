@@ -1,6 +1,6 @@
 import DropModel from '../models/DropModel';
 import ProductModel from '../models/ProductModel';
-import { Product, ProductData } from '../types';
+import { ProductData } from '../types';
 
 export const createDrop = async (dropName: string) => {
   const drop = new DropModel({ name: dropName });
@@ -28,18 +28,18 @@ export const updateDrop = async (
   dropId: string,
   dropName: string,
   dropAccess: string,
-  productsToRemove: Product[]
+  productsToRemove: string[]
 ) => {
   if (productsToRemove.length > 0) {
-    const productIdsToRemove = productsToRemove.map((product) => product._id);
+    console.log(productsToRemove);
 
     await ProductModel.updateMany(
-      { _id: { $in: productIdsToRemove } },
-      { $pull: { drop: dropId } }
+      { _id: { $in: productsToRemove } },
+      { $set: { drop: null } }
     );
 
     await DropModel.findByIdAndUpdate(dropId, {
-      $pull: { products: { $in: productIdsToRemove } }
+      $pull: { products: { $in: productsToRemove } }
     });
   }
 
@@ -59,7 +59,9 @@ export const deleteDrop = async (dropId: string) => {
 };
 
 export const getProduct = async (productId: string) => {
-  const product = await ProductModel.findById(productId).populate('variants');
+  const product = await ProductModel.findById(productId)
+    .populate('variants')
+    .populate('drop');
 
   return product;
 };
