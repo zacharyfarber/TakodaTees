@@ -11,7 +11,7 @@ export const attemptLogin = async (username: string, password: string) => {
 
     return res.data;
   } catch (err) {
-    console.log(err);
+    // TODO: Handle error
   }
 };
 

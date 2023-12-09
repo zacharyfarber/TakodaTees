@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
 import printfulRoutes from './routes/printfulRoutes';
+import storeRoutes from './routes/storeRoutes';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5000'] }));
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/printful', printfulRoutes);
+app.use('/store', storeRoutes);
 
 const PORT = process.env.PORT || 5000;
 

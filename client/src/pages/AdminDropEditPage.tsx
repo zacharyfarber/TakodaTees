@@ -82,8 +82,6 @@ function AdminDropEditPage() {
       setDropName(drop.name);
       setDropAccess(drop.access);
     }
-
-    console.log(drop);
   }, [drop]);
 
   if (isLoading) return <div>Loading...</div>;

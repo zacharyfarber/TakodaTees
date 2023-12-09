@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { attemptLogin } from '../apis/authApi';
@@ -9,7 +9,8 @@ function LoginPage() {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+
+  const { login, authenticated } = useAuth();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,6 +23,11 @@ function LoginPage() {
       navigate('/admin/dashboard');
     }
   };
+
+  useEffect(() => {
+    // if user is already logged in, redirect to dashboard
+    if (authenticated) navigate('/admin/dashboard');
+  }, [navigate, authenticated]);
 
   return (
     <form onSubmit={handleLogin}>

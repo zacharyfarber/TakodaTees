@@ -31,8 +31,6 @@ export const updateDrop = async (
   productsToRemove: string[]
 ) => {
   if (productsToRemove.length > 0) {
-    console.log(productsToRemove);
-
     await ProductModel.updateMany(
       { _id: { $in: productsToRemove } },
       { $set: { drop: null } }

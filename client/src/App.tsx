@@ -9,6 +9,7 @@ import AdminDropsViewPage from './pages/AdminDropsViewPage';
 import AdminDropEditPage from './pages/AdminDropEditPage';
 import AdminProductsViewPage from './pages/AdminProductsViewPage';
 import AdminProductEditPage from './pages/AdminProductEditPage';
+import HomePage from './pages/HomePage';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
+          <Route path="/" element={<HomePage />} />
+
           <Route path="/admin/login" element={<AdminLoginPage />} />
 
           <Route
