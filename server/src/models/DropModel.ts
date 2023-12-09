@@ -1,3 +1,5 @@
+// Notes: Make name unique
+
 import { model, Schema } from 'mongoose';
 
 const DropSchema = new Schema(

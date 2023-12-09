@@ -57,11 +57,47 @@ export const deleteDrop = async (req: Request, res: Response) => {
   }
 };
 
+export const getProduct = async (req: Request, res: Response) => {
+  try {
+    const product = await adminServices.getProduct(req.params.productId);
+
+    return res.status(200).json(product);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
 export const getProducts = async (_req: Request, res: Response) => {
   try {
     const products = await adminServices.getProducts();
 
     return res.status(200).json(products);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+export const updateProductData = async (req: Request, res: Response) => {
+  try {
+    const product = await adminServices.updateProductData(
+      req.params.productId,
+      req.body.productData
+    );
+
+    return res.status(200).json(product);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+export const updateProductDrop = async (req: Request, res: Response) => {
+  try {
+    const product = await adminServices.updateProductDrop(
+      req.params.productId,
+      req.body.dropName
+    );
+
+    return res.status(200).json(product);
   } catch (err) {
     return res.status(500).json(err);
   }

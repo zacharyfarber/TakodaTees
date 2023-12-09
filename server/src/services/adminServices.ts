@@ -1,6 +1,6 @@
 import DropModel from '../models/DropModel';
 import ProductModel from '../models/ProductModel';
-import { Product } from '../types';
+import { Product, ProductData } from '../types';
 
 export const createDrop = async (dropName: string) => {
   const drop = new DropModel({ name: dropName });
@@ -58,10 +58,83 @@ export const deleteDrop = async (dropId: string) => {
   await ProductModel.updateMany({ drop: dropId }, { $set: { drop: null } });
 };
 
+export const getProduct = async (productId: string) => {
+  const product = await ProductModel.findById(productId).populate('variants');
+
+  return product;
+};
+
 export const getProducts = async () => {
   const products = await ProductModel.find().sort({ createdAt: -1 });
 
   return products;
+};
+
+export const updateProductData = async (
+  productId: string,
+  productData: ProductData
+) => {
+  const {
+    name,
+    price,
+    colors,
+    sizes,
+    description,
+    details,
+    category,
+    keywords
+  } = productData;
+
+  for (const key in colors) {
+    if (colors[key] && colors[key].length) colors[key] = '#' + colors[key];
+  }
+
+  const keywordsArray = keywords.split(',');
+
+  const update = {
+    name,
+    price,
+    colors,
+    sizes,
+    description,
+    details,
+    category,
+    keywords: keywordsArray
+  };
+
+  const product = await ProductModel.findByIdAndUpdate(
+    productId,
+    { $set: update },
+    {
+      new: true
+    }
+  );
+
+  return product;
+};
+
+export const updateProductDrop = async (
+  productId: string,
+  dropName: string
+) => {
+  await DropModel.updateMany(
+    { products: { $in: [productId] } },
+    { $pull: { products: productId } }
+  );
+
+  const drop = await DropModel.findOneAndUpdate(
+    { name: dropName },
+    { $push: { products: productId } },
+    { new: true }
+  );
+
+  const product = await ProductModel.findByIdAndUpdate(
+    productId,
+    { drop: drop?._id },
+    { new: true }
+  );
+
+  return product;
 };
 
 export const deleteProduct = async (productId: string) => {

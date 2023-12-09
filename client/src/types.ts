@@ -26,3 +26,15 @@ export interface Variant {
   name: string;
   product: Product | string;
 }
+
+export interface ProductData {
+  name: string;
+  price: number;
+  colors: { [key: string]: string };
+  sizes: string[];
+  description: string;
+  details: string;
+  category: string;
+  keywords: string;
+  drop: string;
+}
