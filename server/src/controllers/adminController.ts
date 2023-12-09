@@ -56,3 +56,23 @@ export const deleteDrop = async (req: Request, res: Response) => {
     return res.status(500).json(err);
   }
 };
+
+export const getProducts = async (_req: Request, res: Response) => {
+  try {
+    const products = await adminServices.getProducts();
+
+    return res.status(200).json(products);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    await adminServices.deleteProduct(req.params.productId);
+
+    return res.status(200).json({ message: 'OK' });
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};

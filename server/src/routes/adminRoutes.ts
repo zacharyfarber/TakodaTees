@@ -9,5 +9,7 @@ router.get('/drops/:dropId', adminController.getDrop);
 router.get('/drops', adminController.getDrops);
 router.put('/drops/:dropId', adminController.updateDrop);
 router.delete('/drops/:dropId', adminController.deleteDrop);
+router.get('/products', adminController.getProducts);
+router.delete('/products/:productId', adminController.deleteProduct);
 
 export default router;

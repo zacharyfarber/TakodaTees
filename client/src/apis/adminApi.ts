@@ -62,3 +62,23 @@ export const deleteDrop = async (dropId: string) => {
     // TODO: Handle error
   }
 };
+
+export const getProducts = async () => {
+  try {
+    const res = await axios.get(`${apiUrl}/admin/products`);
+
+    return res.data;
+  } catch (err) {
+    // TODO: Handle error
+  }
+};
+
+export const deleteProduct = async (productId: string) => {
+  try {
+    const res = await axios.delete(`${apiUrl}/admin/products/${productId}`);
+
+    return res.data;
+  } catch (err) {
+    // TODO: Handle error
+  }
+};

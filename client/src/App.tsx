@@ -7,6 +7,7 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDropsViewPage from './pages/AdminDropsViewPage';
 import AdminDropEditPage from './pages/AdminDropEditPage';
+import AdminProductsViewPage from './pages/AdminProductsViewPage';
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,11 @@ function App() {
           <Route
             path="/admin/drops/:dropId"
             element={<PrivateRoute component={<AdminDropEditPage />} />}
+          />
+
+          <Route
+            path="/admin/products"
+            element={<PrivateRoute component={<AdminProductsViewPage />} />}
           />
         </Routes>
       </Router>

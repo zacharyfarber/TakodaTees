@@ -57,3 +57,18 @@ export const deleteDrop = async (dropId: string) => {
 
   await ProductModel.updateMany({ drop: dropId }, { $set: { drop: null } });
 };
+
+export const getProducts = async () => {
+  const products = await ProductModel.find().sort({ createdAt: -1 });
+
+  return products;
+};
+
+export const deleteProduct = async (productId: string) => {
+  await DropModel.updateMany(
+    { products: { $in: [productId] } },
+    { $pull: { products: productId } }
+  );
+
+  await ProductModel.findByIdAndDelete(productId);
+};
