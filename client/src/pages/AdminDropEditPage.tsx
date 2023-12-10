@@ -58,7 +58,13 @@ function AdminDropEditPage() {
       let image = '';
 
       if (product.images)
-        image = Object.values(product.images)[0].split(',')[0];
+        image = Object.values(product.images)[0]
+          .split(',')
+          .filter((image) => {
+            return (
+              image.includes('thumbnail') && !image.includes('color_thumbnail')
+            );
+          })[0];
 
       return (
         <div key={product._id}>
