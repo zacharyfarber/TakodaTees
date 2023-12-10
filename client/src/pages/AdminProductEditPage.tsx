@@ -90,6 +90,8 @@ function AdminProductEditPage() {
           ...prev,
           dropForm: { pending: false, success: false }
         }));
+
+        return;
       } else {
         if (
           !productData.name ||
@@ -182,31 +184,12 @@ function AdminProductEditPage() {
   };
 
   const checkProductDropErrors = () => {
-    const errors: {
-      name: string;
-      price: string;
-      colors: string;
-      sizes: string;
-      description: string;
-      details: string;
-      category: string;
-      keywords: string;
-      drop: string;
-    } = {
-      name: '',
-      price: '',
-      colors: '',
-      sizes: '',
-      description: '',
-      details: '',
-      category: '',
-      keywords: '',
-      drop: ''
-    };
-
-    if (!productData.drop) errors.drop = 'Drop is required';
-
-    setProductDataErrors(() => errors);
+    if (!productData.drop) {
+      setProductDataErrors((prev) => ({
+        ...prev,
+        drop: 'Drop is required'
+      }));
+    }
 
     setFormsSubmitted((prev) => ({
       ...prev,

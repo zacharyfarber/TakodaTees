@@ -57,7 +57,8 @@ function AdminDropEditPage() {
     return (drop.products as Product[]).map((product) => {
       let image = '';
 
-      if (product.images) image = Object.values(product.images)[0][0];
+      if (product.images)
+        image = Object.values(product.images)[0].split(',')[0];
 
       return (
         <div key={product._id}>

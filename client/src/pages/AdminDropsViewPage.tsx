@@ -60,7 +60,8 @@ function AdminDropsViewPage() {
           ? (drop.products as Product[]).map((product) => {
               let image = '';
 
-              if (product.images) image = Object.values(product.images)[0][0];
+              if (product.images)
+                image = Object.values(product.images)[0].split(',')[0];
 
               return (
                 <LazyImage key={product._id} src={image} alt={product.name} />
