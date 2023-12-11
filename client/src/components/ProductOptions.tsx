@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 
 import ProductContext from '../contexts/ProductContext';
 import { Product } from '../types';
+import LazyImage from './LazyImage';
 
 function ProductOptions({
   product,
@@ -19,14 +20,24 @@ function ProductOptions({
   const { colors, sizes } = product;
 
   const renderColors = () =>
-    Object.entries(colors).map(([color, hex]) => {
+    Object.entries(colors).map(([color]) => {
+      const images = product.images[color].split(',');
+
+      let colorThumbnail = images.find((image) =>
+        image.includes('color_thumbnail')
+      );
+
+      if (!colorThumbnail)
+        colorThumbnail = images.find((image) => image.includes('front'));
+
       return (
         <div
-          style={{ backgroundColor: hex }}
-          className="h-5 w-5"
+          className="h-20 w-20"
           key={color}
           onClick={() => setSelectedColor(color)}
-        />
+        >
+          <LazyImage src={colorThumbnail as string} alt={color} />
+        </div>
       );
     });
 

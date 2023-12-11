@@ -221,8 +221,6 @@ function ProductViewPage() {
     if (product) {
       setSelectedColor(Object.keys(product.colors)[0]);
     }
-
-    console.log(product);
   }, [product]);
 
   useEffect(() => {
