@@ -1,4 +1,4 @@
-function ProductsSliderArrows({
+function ProductSliderArrows({
   direction,
   className,
   onClick
@@ -46,4 +46,4 @@ function ProductsSliderArrows({
   return null;
 }
 
-export default ProductsSliderArrows;
+export default ProductSliderArrows;

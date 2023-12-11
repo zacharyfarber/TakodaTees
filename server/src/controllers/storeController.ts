@@ -11,3 +11,15 @@ export const getRecentDrops = async (_req: Request, res: Response) => {
     return res.status(500).json(err);
   }
 };
+
+export const getProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+
+    const product = await storeServices.getProduct(productId);
+
+    return res.status(200).json(product);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};

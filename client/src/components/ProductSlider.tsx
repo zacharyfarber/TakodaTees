@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 
-import useSelectedProduct from '../hooks/useSelectedProduct';
+// import useSelectedProduct from '../hooks/useSelectedProduct';
 import { Product } from '../types';
 import LazyImage from './LazyImage';
 import ProductSliderArrows from './ProductSliderArrows';
@@ -16,7 +16,7 @@ function ProductSlider({
 }) {
   const [isDragging, setIsDragging] = useState(false);
 
-  const { setSelectedProduct } = useSelectedProduct();
+  // const { setSelectedProduct } = useSelectedProduct();
   const navigate = useNavigate();
 
   let slidesToShow = 0;
@@ -43,7 +43,7 @@ function ProductSlider({
 
   const handleViewProduct = (product: Product) => {
     if (!isDragging) {
-      setSelectedProduct(product);
+      // setSelectedProduct(product);
 
       navigate(`/product/${product._id}`);
     }

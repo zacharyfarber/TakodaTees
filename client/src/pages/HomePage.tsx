@@ -39,7 +39,7 @@ function HomePage() {
     <div>
       <div>Spotlight Hero</div>
 
-      <div>{renderDrops()}</div>
+      <div className="w-10/12 mx-auto">{renderDrops()}</div>
     </div>
   );
 }

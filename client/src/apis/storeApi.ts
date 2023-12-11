@@ -7,3 +7,9 @@ export const getRecentDrops = async () => {
 
   return res.data;
 };
+
+export const getProduct = async (productId: string) => {
+  const res = await axios.get(`${apiUrl}/store/product/${productId}`);
+
+  return res.data;
+};

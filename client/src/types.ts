@@ -38,3 +38,20 @@ export interface ProductData {
   keywords: string;
   drop: string;
 }
+
+export interface ProductContext {
+  selectedColor: string;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
+  selectedSize: string;
+  setSelectedSize: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface CartContext {
+  cartKey: number;
+  setCartKey: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface CartItem {
+  item: { product: Product; variant: Variant };
+  count: number;
+}

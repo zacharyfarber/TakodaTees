@@ -1,3 +1,5 @@
+// Notes: Allow edit color and hex code for each color
+
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
