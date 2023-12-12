@@ -123,26 +123,36 @@ function Cart() {
               {productName}
             </p>
 
-            <div className="flex justify-between">
-              <p
-                className={`${
-                  counter % 2 === 0
-                    ? 'bg-[#F0F0F0] text-[#1E1E1E]'
-                    : 'bg-[#1E1E1E] text-[#F0F0F0]'
-                } px-2 h-[2rem] flex items-center text-2xl w-[40%]`}
-              >
-                {color}
-              </p>
+            <div className="flex">
+              {color && (
+                <p
+                  className={`${
+                    counter % 2 === 0
+                      ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                      : 'bg-[#1E1E1E] text-[#F0F0F0]'
+                  } px-2 h-[2rem] flex items-center text-2xl w-[40%] mr-[20%]`}
+                >
+                  {color}
+                </p>
+              )}
 
-              <p
-                className={`${
-                  counter % 2 === 0
-                    ? 'bg-[#F0F0F0] text-[#1E1E1E]'
-                    : 'bg-[#1E1E1E] text-[#F0F0F0]'
-                } px-2 h-[2rem] flex items-center text-2xl`}
-              >
-                {size}
-              </p>
+              {size && (
+                <p
+                  className={`${
+                    counter % 2 === 0
+                      ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                      : 'bg-[#1E1E1E] text-[#F0F0F0]'
+                  } px-2 h-[2rem] flex items-center text-2xl w-[40%]] flex-grow`}
+                >
+                  {size.toLowerCase() === 's'
+                    ? 'Small'
+                    : size.toLowerCase() === 'm'
+                    ? 'Medium'
+                    : size.toLowerCase() === 'l'
+                    ? 'Large'
+                    : 'Extra Large'}
+                </p>
+              )}
             </div>
           </div>
 

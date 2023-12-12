@@ -1,7 +1,12 @@
 // Notes: Style scrollbar?
 
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation
+} from 'react-router-dom';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -21,6 +26,16 @@ import ProductViewPage from './pages/ProductViewPage';
 
 const queryClient = new QueryClient();
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   const [cartKey, setCartKey] = useState(Date.now());
   const [cartOpen, setCartOpen] = useState(false);
@@ -35,6 +50,8 @@ function App() {
           value={{ cartKey, setCartKey, cartOpen, setCartOpen }}
         >
           <Router>
+            <ScrollToTop />
+
             <Header />
 
             <Routes>

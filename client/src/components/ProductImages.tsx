@@ -34,7 +34,7 @@ function ProductImages({ product }: { product: Product }) {
   const sliderSettings = {
     customPaging: function (index: number) {
       return (
-        <div className="inline-block">
+        <div>
           <LazyImage
             src={imagesToDisplay[index]}
             alt={`${name}_thumb_${index}`}

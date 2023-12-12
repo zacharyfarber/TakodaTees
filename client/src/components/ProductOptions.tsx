@@ -65,7 +65,7 @@ function ProductOptions({
   }, [selectedColor]);
 
   return (
-    <div className="py-5">
+    <div>
       {colors && Object.keys(colors).length > 0 ? (
         <div className="mb-16">
           <div className="flex items-center mb-5">
@@ -81,7 +81,9 @@ function ProductOptions({
           <div>
             <div className="flex flex-wrap">{renderColors()}</div>
 
-            {productOptionErrors.color && productOptionErrors.color}
+            <div className="mt-3 text-red-500 font-libre text-s">
+              {productOptionErrors.color && productOptionErrors.color}
+            </div>
           </div>
         </div>
       ) : null}
@@ -107,7 +109,9 @@ function ProductOptions({
           <div>
             <div className="flex">{renderSizes()}</div>
 
-            {productOptionErrors.size && productOptionErrors.size}
+            <div className="mt-3 text-red-500 font-libre text-s">
+              {productOptionErrors.size && productOptionErrors.size}
+            </div>
           </div>
         </div>
       ) : null}

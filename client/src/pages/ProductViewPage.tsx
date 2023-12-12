@@ -27,6 +27,8 @@ function ProductViewPage() {
     size: ''
   });
 
+  const [isClicked, setIsClicked] = useState(false);
+
   const { selectedColor, setSelectedColor, selectedSize } =
     useContext(ProductContext)!;
 
@@ -187,6 +189,12 @@ function ProductViewPage() {
       });
     }
 
+    setIsClicked(true);
+
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 350);
+
     setProductOptionErrors({
       color: '',
       size: ''
@@ -199,23 +207,23 @@ function ProductViewPage() {
     const { name, price, description, details } = product;
 
     return (
-      <div className="block mb-20">
+      <div className="flex flex-col mb-20 min-h-[40rem]">
         <p className="border border-[#1E1E1E] w-[95%] mx-auto my-5 text-center flex justify-center items-center h-[4rem] font-simonetta text-4xl">
           {name}
         </p>
 
-        <div className="flex items-start justify-between h-[40rem] mb-24">
+        <div className="flex items-start justify-between h-full mb-24">
           <div className="w-[47.5%]">
             <ProductImages product={product} />
           </div>
 
-          <div className="w-[47.5%] border border-[#1E1E1E] px-5 h-full">
+          <div className="w-[47.5%] border border-[#1E1E1E] px-5 self-stretch flex flex-col justify-evenly">
             <ProductOptions
               product={product}
               productOptionErrors={productOptionErrors}
             />
 
-            <div className="flex items-center mb-16">
+            <div className="flex items-center">
               <p className="font-simonetta text-3xl mr-5">Price:</p>
 
               <p className="font-nanum text-3xl flex self-end">${price}</p>
@@ -224,7 +232,9 @@ function ProductViewPage() {
             <button
               type="button"
               onClick={handleAddToCart}
-              className="flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[40%] h-10 text-lg mt-5 font-simonetta"
+              className={`flex justify-center items-center mx-auto text-center w-[40%] h-10 text-lg mt-5 font-simonetta ${
+                isClicked ? '!bg-[#373737]' : 'bg-[#1E1E1E]'
+              } text-[#F0F0F0]`}
             >
               Add to Cart
             </button>
@@ -267,7 +277,7 @@ function ProductViewPage() {
   const productDrop = (product as Product).drop;
 
   return (
-    <div className="max-w-[90%] mx-auto">
+    <div className="max-w-[70%] mx-auto flex flex-col">
       <div>{renderProduct()}</div>
 
       <div>
