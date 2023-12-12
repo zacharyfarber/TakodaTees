@@ -1,3 +1,5 @@
+// Notes: Fix cart closing when item is removed
+
 import { useContext, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -269,7 +271,7 @@ function Cart() {
               )}
             </div>
 
-            <div className="mr-5 w-[30%] border-[#1E1E1E] border p-5 font-sahitya ">
+            <div className="mr-5 w-[30%] border-[#1E1E1E] border p-5 font-sahitya my-2">
               <div className="flex text-xl text-center">
                 <p className="ml-6 w-[35%] text-center">Subtotal</p>
 
