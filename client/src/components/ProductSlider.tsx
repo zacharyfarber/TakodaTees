@@ -70,7 +70,13 @@ function ProductSlider({
 
       return (
         <div key={product._id} onClick={() => handleViewProduct(product)}>
-          <LazyImage src={image} alt={product.name} />
+          <LazyImage
+            src={image}
+            alt={product.name}
+            className={`border-[1rem] border-black ${
+              type === 'recent-drops' ? 'bg-[#2F2F2F]' : 'bg-white'
+            }`}
+          />
         </div>
       );
     });

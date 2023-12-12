@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 
-function LazyImage({ src, alt }: { src: string; alt: string }) {
+function LazyImage({
+  src,
+  alt,
+  className
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
   const [imageSrc, setImageSrc] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,7 +27,7 @@ function LazyImage({ src, alt }: { src: string; alt: string }) {
     return <span className="image-loader"></span>;
   }
 
-  return <img src={imageSrc} alt={alt} />;
+  return <img src={imageSrc} alt={alt} className={className} />;
 }
 
 export default LazyImage;
