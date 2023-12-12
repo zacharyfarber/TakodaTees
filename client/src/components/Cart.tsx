@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import CartContext from '../contexts/CartContext';
 import useCart from '../hooks/useCart';
@@ -20,7 +20,8 @@ function Cart() {
     updateCartItemQuantity,
     increaseCartItemQuantity,
     decreaseCartItemQuantity,
-    removeFromCart
+    removeFromCart,
+    calculateCartSubtotal
   } = useCart();
 
   const cart = getCart();
@@ -156,7 +157,27 @@ function Cart() {
         <div>
           <div>{renderCartContents()}</div>
 
-          <div>Checkout Summary</div>
+          <div>
+            <div>
+              <p>Subtotal</p>
+
+              <p>${calculateCartSubtotal()}</p>
+            </div>
+
+            <div>
+              <p>Estimated Tax</p>
+
+              <p>${calculateCartSubtotal() * 0.08}</p>
+            </div>
+
+            <div>
+              <p>Total</p>
+
+              <p>${calculateCartSubtotal() + calculateCartSubtotal() * 0.08}</p>
+            </div>
+
+            <Link to="/checkout">Checkout</Link>
+          </div>
         </div>
       </div>
     </div>
