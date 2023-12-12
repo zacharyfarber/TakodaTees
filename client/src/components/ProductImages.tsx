@@ -1,3 +1,5 @@
+// Notes: When switching colors switch back to front image
+
 import { useContext } from 'react';
 import Slider from 'react-slick';
 
@@ -32,10 +34,11 @@ function ProductImages({ product }: { product: Product }) {
   const sliderSettings = {
     customPaging: function (index: number) {
       return (
-        <div>
+        <div className="inline-block">
           <LazyImage
             src={imagesToDisplay[index]}
             alt={`${name}_thumb_${index}`}
+            className="h-[6rem] w-[6rem]"
           />
         </div>
       );
@@ -45,7 +48,8 @@ function ProductImages({ product }: { product: Product }) {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    arrows: false
   };
 
   const renderImages = () => {

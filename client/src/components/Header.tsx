@@ -42,7 +42,7 @@ function Header() {
 
           <input
             ref={searchRef}
-            className="border-[#F0F0F0] rounded-r-lg focus:outline-none"
+            className="border-[#F0F0F0] rounded-r-lg focus:outline-none bg-[#F0F0F0]"
           />
         </div>
 

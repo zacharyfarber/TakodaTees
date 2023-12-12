@@ -199,21 +199,33 @@ function ProductViewPage() {
     const { name, price, description, details } = product;
 
     return (
-      <div>
-        <p>{name}</p>
+      <div className="block mb-20">
+        <p className="border border-[#1E1E1E] w-[95%] mx-auto my-5 text-center flex justify-center items-center h-[4rem] font-simonetta text-4xl">
+          {name}
+        </p>
 
-        <div>
-          <ProductImages product={product} />
+        <div className="flex items-start justify-between h-[40rem] mb-24">
+          <div className="w-[47.5%]">
+            <ProductImages product={product} />
+          </div>
 
-          <div>
+          <div className="w-[47.5%] border border-[#1E1E1E] px-5 h-full">
             <ProductOptions
               product={product}
               productOptionErrors={productOptionErrors}
             />
 
-            <p>${price}</p>
+            <div className="flex items-center mb-16">
+              <p className="font-simonetta text-3xl mr-5">Price:</p>
 
-            <button type="button" onClick={handleAddToCart}>
+              <p className="font-nanum text-3xl flex self-end">${price}</p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[40%] h-10 text-lg mt-5 font-simonetta"
+            >
               Add to Cart
             </button>
           </div>
@@ -255,13 +267,15 @@ function ProductViewPage() {
   const productDrop = (product as Product).drop;
 
   return (
-    <div className="max-w-[95%] mx-auto">
+    <div className="max-w-[90%] mx-auto">
       <div>{renderProduct()}</div>
 
-      <RelatedProducts
-        productId={productId as string}
-        productDrop={productDrop as Drop}
-      />
+      <div>
+        <RelatedProducts
+          productId={productId as string}
+          productDrop={productDrop as Drop}
+        />
+      </div>
     </div>
   );
 }

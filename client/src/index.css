@@ -6,6 +6,20 @@ html,
 body {
   margin-left: 0.125%;
   margin-right: 0.125%;
+  background-color: #f0f0f0;
+}
+
+.slick-dots {
+  position: initial !important;
+  width: auto !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.slick-dots li {
+  border: #1e1e1e solid 0.05em !important;
+  width: 6rem !important;
+  height: 6rem !important;
 }
 
 .cartBlur > *:not(.header) {

@@ -8,7 +8,8 @@ export default {
     fontFamily: {
       libre: ['Libre Franklin', 'sans-serif'],
       sahitya: ['Sahitya', 'serif'],
-      nanum: ['Nanum Pen Script', 'cursive']
+      nanum: ['Nanum Pen Script', 'cursive'],
+      simonetta: ['Simonetta', 'serif']
     }
   },
   plugins: [require('daisyui')],

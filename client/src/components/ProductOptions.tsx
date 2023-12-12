@@ -31,21 +31,33 @@ function ProductOptions({
         colorThumbnail = images.find((image) => image.includes('front'));
 
       return (
-        <div
-          className="h-20 w-20"
+        <button
+          className={`w-1/5 mx-2 border border-white hover:border-[#878787]/20 ${
+            selectedColor.toLowerCase() === color.toLowerCase()
+              ? '!border-[#878787]'
+              : ''
+          }`}
           key={color}
           onClick={() => setSelectedColor(color)}
         >
           <LazyImage src={colorThumbnail as string} alt={color} />
-        </div>
+        </button>
       );
     });
 
   const renderSizes = () =>
     sizes.map((size) => (
-      <span key={size} onClick={() => setSelectedSize(size)}>
+      <button
+        key={size}
+        onClick={() => setSelectedSize(size)}
+        className={`border border-white rounded-full h-12 w-12 text-center flex items-center justify-center mx-2 hover:bg-[#878787]/20 ${
+          selectedSize.toLowerCase() === size.toLowerCase()
+            ? '!bg-[#878787]'
+            : ''
+        }`}
+      >
         {size}
-      </span>
+      </button>
     ));
 
   useEffect(() => {
@@ -53,21 +65,21 @@ function ProductOptions({
   }, [selectedColor]);
 
   return (
-    <div>
+    <div className="py-5">
       {colors && Object.keys(colors).length > 0 ? (
-        <div>
-          <div>
-            <p>Color:</p>
+        <div className="mb-16">
+          <div className="flex items-center mb-5">
+            <p className="font-simonetta text-3xl mr-5">Color:</p>
 
             {selectedColor ? (
-              <p>
+              <p className="font-nanum text-3xl flex self-end">
                 {selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1)}
               </p>
             ) : null}
           </div>
 
           <div>
-            <div>{renderColors()}</div>
+            <div className="flex flex-wrap">{renderColors()}</div>
 
             {productOptionErrors.color && productOptionErrors.color}
           </div>
@@ -75,12 +87,12 @@ function ProductOptions({
       ) : null}
 
       {sizes && sizes.length > 0 ? (
-        <div>
-          <div>
-            <p>Size:</p>
+        <div className="mb-16">
+          <div className="flex items-center mb-5">
+            <p className="font-simonetta text-3xl mr-5">Size:</p>
 
             {selectedSize ? (
-              <p>
+              <p className="font-nanum text-3xl flex self-end">
                 {selectedSize.toLowerCase() === 's'
                   ? 'Small'
                   : selectedSize.toLowerCase() === 'm'
@@ -93,7 +105,7 @@ function ProductOptions({
           </div>
 
           <div>
-            <div>{renderSizes()}</div>
+            <div className="flex">{renderSizes()}</div>
 
             {productOptionErrors.size && productOptionErrors.size}
           </div>
