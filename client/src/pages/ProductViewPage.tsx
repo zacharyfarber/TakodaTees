@@ -87,7 +87,8 @@ function ProductViewPage() {
     ) {
       addToCart({
         product,
-        variant: variants[0] as Variant
+        variant: variants[0] as Variant,
+        size: selectedSize
       });
     } else if (
       (!colors || Object.keys(colors).length <= 0) &&
@@ -102,7 +103,8 @@ function ProductViewPage() {
 
       addToCart({
         product,
-        variant: variants[index] as Variant
+        variant: variants[index] as Variant,
+        size: selectedSize
       });
     } else if (
       colors &&
@@ -111,7 +113,8 @@ function ProductViewPage() {
     ) {
       addToCart({
         product,
-        variant: variants[0] as Variant
+        variant: variants[0] as Variant,
+        color: selectedColor
       });
     } else if (
       colors &&
@@ -126,7 +129,8 @@ function ProductViewPage() {
 
       addToCart({
         product,
-        variant: variants[index] as Variant
+        variant: variants[index] as Variant,
+        color: selectedColor
       });
     } else if (
       colors &&
@@ -142,7 +146,9 @@ function ProductViewPage() {
 
       addToCart({
         product,
-        variant: variants[index] as Variant
+        variant: variants[index] as Variant,
+        color: selectedColor,
+        size: selectedSize
       });
     } else if (
       colors &&

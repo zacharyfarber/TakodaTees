@@ -79,7 +79,17 @@ function ProductOptions({
           <div>
             <p>Size:</p>
 
-            {selectedSize ? <p>{selectedSize.toUpperCase()}</p> : null}
+            {selectedSize ? (
+              <p>
+                {selectedSize.toLowerCase() === 's'
+                  ? 'Small'
+                  : selectedSize.toLowerCase() === 'm'
+                  ? 'Medium'
+                  : selectedSize.toLowerCase() === 'l'
+                  ? 'Large'
+                  : 'Extra Large'}
+              </p>
+            ) : null}
           </div>
 
           <div>

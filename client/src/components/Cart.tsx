@@ -3,7 +3,9 @@ import { useLocation } from 'react-router-dom';
 
 import CartContext from '../contexts/CartContext';
 import useCart from '../hooks/useCart';
+import { CartItemType } from '../types';
 import CartIcon from './CartIcon';
+import LazyImage from './LazyImage';
 
 function Cart() {
   const cartRef = useRef<HTMLDivElement>(null);
@@ -12,12 +14,86 @@ function Cart() {
 
   const location = useLocation();
 
-  const { calculateProductCount } = useCart();
+  const {
+    calculateProductCount,
+    getCart,
+    updateCartItemQuantity,
+    increaseCartItemQuantity,
+    decreaseCartItemQuantity,
+    removeFromCart
+  } = useCart();
+
+  const cart = getCart();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
       setCartOpen(false);
     }
+  };
+
+  const renderCartContents = () => {
+    return cart.map((cartItem: CartItemType) => {
+      const { item, count } = cartItem;
+
+      const {
+        product: { name: productName, images, price },
+        variant: { _id: variantId, name: variantName },
+        color,
+        size
+      } = item;
+
+      let image = '';
+
+      if (images)
+        image = Object.values(images)[0]
+          .split(',')
+          .filter((image) => {
+            return (
+              image.includes('thumbnail') && !image.includes('color_thumbnail')
+            );
+          })[0];
+
+      return (
+        <div key={variantName}>
+          <button onClick={() => removeFromCart(variantId)}>Remove Item</button>
+
+          <div className="h-20 w-20">
+            <LazyImage src={image} alt={variantName} />
+          </div>
+
+          <div>
+            <p>{productName}</p>
+
+            <div>
+              <p>{color}</p>
+
+              <p>{size}</p>
+            </div>
+          </div>
+
+          <p>${price}</p>
+
+          <div>
+            <input
+              type="number"
+              min={1}
+              value={count}
+              onChange={(e) =>
+                updateCartItemQuantity(variantId, parseInt(e.target.value))
+              }
+            />
+
+            <button onClick={() => increaseCartItemQuantity(variantId)}>
+              +
+            </button>
+
+            <button onClick={() => decreaseCartItemQuantity(variantId)}>
+              -
+            </button>
+          </div>
+        </div>
+      );
+    });
   };
 
   useEffect(() => {
@@ -29,18 +105,18 @@ function Cart() {
   }, []);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDownEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setCartOpen(false);
       }
     };
 
     if (cartOpen) {
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleKeyDownEscape);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDownEscape);
     };
   }, [cartOpen]);
 
@@ -68,7 +144,7 @@ function Cart() {
         </div>
 
         <div>
-          <div>Cart Contents</div>
+          <div>{renderCartContents()}</div>
 
           <div>Checkout Summary</div>
         </div>

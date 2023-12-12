@@ -53,7 +53,7 @@ export interface CartContext {
   setCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface CartItem {
-  item: { product: Product; variant: Variant };
+export interface CartItemType {
+  item: { product: Product; variant: Variant; color?: string; size?: string };
   count: number;
 }
