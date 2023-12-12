@@ -77,7 +77,12 @@ function Cart() {
             counter % 2 === 1 ? 'bg-[#F0F0F0]' : 'bg-[#1E1E1E]'
           } mr-5 font-nanum`}
         >
-          <button onClick={() => removeFromCart(variantId)}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              removeFromCart(variantId);
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -223,10 +228,6 @@ function Cart() {
     setCartOpen(false);
   }, [location]);
 
-  useEffect(() => {
-    console.log(cartOpen);
-  }, [cart]);
-
   return (
     <div>
       <div onMouseEnter={() => setCartOpen(true)} className="flex h-6 ml-5">
@@ -240,7 +241,7 @@ function Cart() {
         ref={cartRef}
         className={`${
           cartOpen ? '!visible' : '!hidden'
-        } absolute w-[99%] right-[.5%] bg-[#F0F0F0] top-12 z-50 border-t-[.5rem] border-[#F0F0F0]]`}
+        } absolute w-[99.5%] right-[.25%] bg-[#F0F0F0] top-12 z-50 border-t-[.5rem] border-[#F0F0F0]]`}
       >
         <div className="border-b-[.5rem] border-[#1E1E1E] border-x-[.5rem]">
           <div className="h-12 flex items-center border-[#1E1E1E] border-[.125rem]">

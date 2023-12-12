@@ -255,7 +255,7 @@ function ProductViewPage() {
   const productDrop = (product as Product).drop;
 
   return (
-    <div>
+    <div className="max-w-[95%] mx-auto">
       <div>{renderProduct()}</div>
 
       <RelatedProducts
