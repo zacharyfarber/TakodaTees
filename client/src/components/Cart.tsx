@@ -44,14 +44,24 @@ function Cart() {
 
       let image = '';
 
-      if (images)
-        image = Object.values(images)[0]
-          .split(',')
-          .filter((image) => {
+      if (images) {
+        if (color) {
+          image = images[color].split(',').filter((image) => {
             return (
               image.includes('thumbnail') && !image.includes('color_thumbnail')
             );
           })[0];
+        } else {
+          image = Object.values(images)[0]
+            .split(',')
+            .filter((image) => {
+              return (
+                image.includes('thumbnail') &&
+                !image.includes('color_thumbnail')
+              );
+            })[0];
+        }
+      }
 
       return (
         <div key={variantName}>

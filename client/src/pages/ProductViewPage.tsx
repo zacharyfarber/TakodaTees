@@ -164,7 +164,9 @@ function ProductViewPage() {
 
       addToCart({
         product,
-        variant: variants[index] as Variant
+        variant: variants[index] as Variant,
+        color: selectedColor,
+        size: selectedSize
       });
     } else {
       let substring = selectedColor.trim().toLowerCase();
@@ -179,7 +181,9 @@ function ProductViewPage() {
 
       addToCart({
         product,
-        variant: variants[index] as Variant
+        variant: variants[index] as Variant,
+        color: selectedColor,
+        size: selectedSize
       });
     }
 
