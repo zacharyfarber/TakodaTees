@@ -1,6 +1,12 @@
 import DropModel from '../models/DropModel';
 import ProductModel from '../models/ProductModel';
 
+export const getDrop = async (dropId: string) => {
+  const drop = await DropModel.findById(dropId).populate('products');
+
+  return drop;
+};
+
 export const getRecentDrops = async () => {
   const recentDrops = await DropModel.find({ access: 'public' })
     .sort({ createdAt: -1 })

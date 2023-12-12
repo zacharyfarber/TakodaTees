@@ -2,6 +2,18 @@ import { Request, Response } from 'express';
 
 import * as storeServices from '../services/storeServices';
 
+export const getDrop = async (req: Request, res: Response) => {
+  try {
+    const { dropId } = req.params;
+
+    const drop = await storeServices.getDrop(dropId);
+
+    return res.status(200).json(drop);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+};
+
 export const getRecentDrops = async (_req: Request, res: Response) => {
   try {
     const recentDrops = await storeServices.getRecentDrops();

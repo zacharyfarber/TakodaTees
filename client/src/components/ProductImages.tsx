@@ -29,7 +29,7 @@ function ProductImages({ product }: { product: Product }) {
     imagesToDisplay.push(backImage);
   }
 
-  const settings = {
+  const sliderSettings = {
     customPaging: function (index: number) {
       return (
         <div>
@@ -60,7 +60,7 @@ function ProductImages({ product }: { product: Product }) {
 
   return (
     <div>
-      <Slider {...settings}>{renderImages()}</Slider>
+      <Slider {...sliderSettings}>{renderImages()}</Slider>
     </div>
   );
 }

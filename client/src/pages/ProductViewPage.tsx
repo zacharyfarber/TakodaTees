@@ -9,9 +9,10 @@ import { getProduct } from '../apis/storeApi';
 import ProductImages from '../components/ProductImages';
 import ProductOptions from '../components/ProductOptions';
 import ProductTabs from '../components/ProductTabs';
+import RelatedProducts from '../components/RelatedProducts';
 import ProductContext from '../contexts/ProductContext';
 import useCart from '../hooks/useCart';
-import { Product, Variant } from '../types';
+import { Drop, Product, Variant } from '../types';
 
 function ProductViewPage() {
   const { productId } = useParams();
@@ -241,11 +242,16 @@ function ProductViewPage() {
 
   if (isLoading) return <div>Loading...</div>;
 
+  const productDrop = (product as Product).drop;
+
   return (
     <div>
       <div>{renderProduct()}</div>
 
-      <div>Rest of the Products in Corresponding Drop</div>
+      <RelatedProducts
+        productId={productId as string}
+        productDrop={productDrop as Drop}
+      />
     </div>
   );
 }

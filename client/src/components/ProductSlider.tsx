@@ -25,14 +25,18 @@ function ProductSlider({
     slidesToShow = products.length > 3 ? 3 : products.length;
   }
 
+  if (type === 'related-products') {
+    slidesToShow = products.length > 4 ? 4 : products.length;
+  }
+
   const sliderSettings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
     slidesToShow,
-    prevArrow: <ProductSliderArrows direction="left" />,
-    nextArrow: <ProductSliderArrows direction="right" />,
+    prevArrow: <ProductSliderArrows direction="left" type={type} />,
+    nextArrow: <ProductSliderArrows direction="right" type={type} />,
     beforeChange: () => {
       setIsDragging(true);
     },
