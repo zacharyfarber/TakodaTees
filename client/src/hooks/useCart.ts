@@ -10,13 +10,13 @@ function useCart() {
 
   let cart = cartItem ? JSON.parse(cartItem) : [];
 
-  let subtotal = 0;
-
   function getCart() {
     return cart;
   }
 
   function calculateCartSubtotal() {
+    let subtotal = 0;
+
     cart.forEach(
       ({
         item: { product },
@@ -28,6 +28,16 @@ function useCart() {
     );
 
     return subtotal;
+  }
+
+  function calculateProductCount() {
+    let count = 0;
+
+    cart.forEach(({ count: itemCount }: { count: number }) => {
+      count += itemCount;
+    });
+
+    return count;
   }
 
   function addToCart(item: CartItem['item']) {
@@ -81,6 +91,7 @@ function useCart() {
   return {
     getCart,
     calculateCartSubtotal,
+    calculateProductCount,
     addToCart,
     removeFromCart,
     updateCartItemQuantity

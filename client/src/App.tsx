@@ -20,65 +20,70 @@ const queryClient = new QueryClient();
 
 function App() {
   const [cartKey, setCartKey] = useState(Date.now());
+  const [cartOpen, setCartOpen] = useState(false);
 
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <CartContext.Provider value={{ cartKey, setCartKey }}>
-        <Router>
-          <Header />
+    <div>
+      <QueryClientProvider client={queryClient}>
+        <CartContext.Provider
+          value={{ cartKey, setCartKey, cartOpen, setCartOpen }}
+        >
+          <Router>
+            <Header />
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
 
-            <Route
-              path="/product/:productId"
-              element={
-                <ProductContext.Provider
-                  value={{
-                    selectedColor,
-                    setSelectedColor,
-                    selectedSize,
-                    setSelectedSize
-                  }}
-                >
-                  <ProductViewPage />
-                </ProductContext.Provider>
-              }
-            />
+              <Route
+                path="/product/:productId"
+                element={
+                  <ProductContext.Provider
+                    value={{
+                      selectedColor,
+                      setSelectedColor,
+                      selectedSize,
+                      setSelectedSize
+                    }}
+                  >
+                    <ProductViewPage />
+                  </ProductContext.Provider>
+                }
+              />
 
-            <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route path="/admin/login" element={<AdminLoginPage />} />
 
-            <Route
-              path="/admin/dashboard"
-              element={<PrivateRoute component={<AdminDashboardPage />} />}
-            />
+              <Route
+                path="/admin/dashboard"
+                element={<PrivateRoute component={<AdminDashboardPage />} />}
+              />
 
-            <Route
-              path="/admin/drops"
-              element={<PrivateRoute component={<AdminDropsViewPage />} />}
-            />
+              <Route
+                path="/admin/drops"
+                element={<PrivateRoute component={<AdminDropsViewPage />} />}
+              />
 
-            <Route
-              path="/admin/drops/:dropId"
-              element={<PrivateRoute component={<AdminDropEditPage />} />}
-            />
+              <Route
+                path="/admin/drops/:dropId"
+                element={<PrivateRoute component={<AdminDropEditPage />} />}
+              />
 
-            <Route
-              path="/admin/products"
-              element={<PrivateRoute component={<AdminProductsViewPage />} />}
-            />
+              <Route
+                path="/admin/products"
+                element={<PrivateRoute component={<AdminProductsViewPage />} />}
+              />
 
-            <Route
-              path="/admin/products/:productId"
-              element={<PrivateRoute component={<AdminProductEditPage />} />}
-            />
-          </Routes>
-        </Router>
-      </CartContext.Provider>
-    </QueryClientProvider>
+              <Route
+                path="/admin/products/:productId"
+                element={<PrivateRoute component={<AdminProductEditPage />} />}
+              />
+            </Routes>
+          </Router>
+        </CartContext.Provider>
+      </QueryClientProvider>
+    </div>
   );
 }
 

@@ -49,6 +49,8 @@ export interface ProductContext {
 export interface CartContext {
   cartKey: number;
   setCartKey: React.Dispatch<React.SetStateAction<number>>;
+  cartOpen: boolean;
+  setCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CartItem {
