@@ -72,7 +72,7 @@ function Cart() {
         <div
           key={variantName}
           className={`flex my-3 h-[6.25rem] items-center justify-between ${
-            counter % 2 === 1 ? 'bg-[#F0F0F0]' : 'bg-[#000000]'
+            counter % 2 === 1 ? 'bg-[#F0F0F0]' : 'bg-[#1E1E1E]'
           } mr-5 font-nanum`}
         >
           <button onClick={() => removeFromCart(variantId)}>
@@ -86,17 +86,17 @@ function Cart() {
               <rect
                 width="25"
                 height="6.25rem"
-                fill={counter % 2 === 0 ? '#F0F0F0' : '#000000'}
+                fill={counter % 2 === 0 ? '#F0F0F0' : '#1E1E1E'}
               />
 
               <path
                 d="M6.04167 60.3333C5.77515 60.3333 5.50863 60.1915 5.30518 59.9078C4.89827 59.3405 4.89827 58.4214 5.30518 57.8541L17.8052 40.4255C18.2121 39.8582 18.8713 39.8582 19.2782 40.4255C19.6851 40.9928 19.6851 41.9119 19.2782 42.4793L6.77816 59.9078C6.57471 60.1915 6.30819 60.3333 6.04167 60.3333Z"
-                fill={counter % 2 === 1 ? '#F0F0F0' : '#000000'}
+                fill={counter % 2 === 1 ? '#F0F0F0' : '#1E1E1E'}
               />
 
               <path
                 d="M18.5417 60.3333C18.2751 60.3333 18.0086 60.1915 17.8052 59.9078L5.30518 42.4793C4.89827 41.9119 4.89827 40.9928 5.30518 40.4255C5.71208 39.8582 6.37126 39.8582 6.77816 40.4255L19.2782 57.8541C19.6851 58.4214 19.6851 59.3405 19.2782 59.9078C19.0747 60.1915 18.8082 60.3333 18.5417 60.3333Z"
-                fill={counter % 2 === 1 ? '#F0F0F0' : '#000000'}
+                fill={counter % 2 === 1 ? '#F0F0F0' : '#1E1E1E'}
               />
             </svg>
           </button>
@@ -109,8 +109,8 @@ function Cart() {
             <p
               className={`${
                 counter % 2 === 0
-                  ? 'bg-[#F0F0F0] text-black'
-                  : 'bg-[#000000] text-white'
+                  ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                  : 'bg-[#1E1E1E] text-[#F0F0F0]'
               } mb-2 px-2 h-[2rem] flex items-center text-2xl`}
             >
               {productName}
@@ -120,8 +120,8 @@ function Cart() {
               <p
                 className={`${
                   counter % 2 === 0
-                    ? 'bg-[#F0F0F0] text-black'
-                    : 'bg-[#000000] text-white'
+                    ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                    : 'bg-[#1E1E1E] text-[#F0F0F0]'
                 } px-2 h-[2rem] flex items-center text-2xl`}
               >
                 {color}
@@ -130,8 +130,8 @@ function Cart() {
               <p
                 className={`${
                   counter % 2 === 0
-                    ? 'bg-[#F0F0F0] text-black'
-                    : 'bg-[#000000] text-white'
+                    ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                    : 'bg-[#1E1E1E] text-[#F0F0F0]'
                 } px-2 h-[2rem] flex items-center text-2xl`}
               >
                 {size}
@@ -143,8 +143,8 @@ function Cart() {
             <p
               className={`${
                 counter % 2 === 0
-                  ? 'bg-[#F0F0F0] text-black'
-                  : 'bg-[#000000] text-white'
+                  ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                  : 'bg-[#1E1E1E] text-[#F0F0F0]'
               } mx-5 text-5xl text-center h-[5rem] w-[5rem] flex items-center justify-center`}
             >
               ${price}
@@ -153,8 +153,8 @@ function Cart() {
             <div
               className={`${
                 counter % 2 === 0
-                  ? 'bg-[#F0F0F0] text-black'
-                  : 'bg-[#000000] text-white'
+                  ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                  : 'bg-[#1E1E1E] text-[#F0F0F0]'
               } flex`}
             >
               <input
@@ -166,8 +166,8 @@ function Cart() {
                 }
                 className={`w-[25%] appearance-none focus:outline-none ${
                   counter % 2 === 0
-                    ? 'bg-[#F0F0F0] text-black'
-                    : 'bg-[#000000] text-white'
+                    ? 'bg-[#F0F0F0] text-[#1E1E1E]'
+                    : 'bg-[#1E1E1E] text-[#F0F0F0]'
                 } text-5xl text-center h-[5rem] w-[4rem]`}
               />
 
@@ -221,6 +221,10 @@ function Cart() {
     setCartOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    console.log(cartOpen);
+  }, [cart]);
+
   return (
     <div>
       <div onMouseEnter={() => setCartOpen(true)} className="flex h-6 ml-5">
@@ -234,10 +238,10 @@ function Cart() {
         ref={cartRef}
         className={`${
           cartOpen ? '!visible' : '!hidden'
-        } absolute w-[99%] right-[.5%] bg-white top-12 z-50 border-t-[.5rem] border-[#F0F0F0]]`}
+        } absolute w-[99%] right-[.5%] bg-[#F0F0F0] top-12 z-50 border-t-[.5rem] border-[#F0F0F0]]`}
       >
-        <div className="border-b-[.5rem] border-black border-x-[.5rem]">
-          <div className="h-12 flex items-center border-black border-[.125rem]">
+        <div className="border-b-[.5rem] border-[#1E1E1E] border-x-[.5rem]">
+          <div className="h-12 flex items-center border-[#1E1E1E] border-[.125rem]">
             <span className="navbar-start"></span>
 
             <p className="navbar-center font-nanum text-3xl">Cart Summary</p>
@@ -250,10 +254,22 @@ function Cart() {
             </button>
           </div>
 
-          <div className="flex items-center justify-between border-black border-x-[.5rem]">
-            <div className="w-[67.5%]">{renderCartContents()}</div>
+          <div className="flex items-center justify-between border-[#1E1E1E] border-x-[.5rem]">
+            <div
+              className={`w-[67.5%] overflow-y-scroll max-h-96 ${
+                cart.length > 0 ? '' : 'hide-scrollbar'
+              }`}
+            >
+              {cart.length > 0 ? (
+                <div>{renderCartContents()}</div>
+              ) : (
+                <p className="flex justify-center items-center font-nanum text-5xl">
+                  No Items in Cart
+                </p>
+              )}
+            </div>
 
-            <div className="mr-5 w-[30%] border-black border p-5 font-sahitya ">
+            <div className="mr-5 w-[30%] border-[#1E1E1E] border p-5 font-sahitya ">
               <div className="flex text-xl text-center">
                 <p className="ml-6 w-[35%] text-center">Subtotal</p>
 
@@ -276,7 +292,7 @@ function Cart() {
                 </p>
               </div>
 
-              <div className="flex justify-center items-center mx-auto text-center bg-black text-white w-[45%] h-10 text-m mt-5">
+              <div className="flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[45%] h-10 text-m mt-5">
                 <Link to="/checkout">Check Out</Link>
               </div>
             </div>

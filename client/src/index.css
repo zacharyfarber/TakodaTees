@@ -17,6 +17,10 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .image-loader {
   width: 3rem;
   height: 3rem;

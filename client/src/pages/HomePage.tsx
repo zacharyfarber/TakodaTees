@@ -28,7 +28,7 @@ function HomePage() {
     return drops.map((drop: Drop) => {
       return (
         <div key={drop._id}>
-          <p className="text-4xl font-nanum text-white text-center my-5">
+          <p className="text-5xl font-nanum text-[#F0F0F0] text-center my-5">
             {drop.name}
           </p>
 
@@ -42,7 +42,7 @@ function HomePage() {
   };
 
   return (
-    <div className="bg-black">
+    <div className="bg-[#1E1E1E]">
       <div
         style={{ backgroundImage: `url(${SpotlightBackground})` }}
         className="w-full h-[37.5rem] bg-cover bg-center bg-no-repeat"
@@ -69,7 +69,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="border-y-2 border-white">
+      <div className="border-y-2 border-[#F0F0F0]">
         <div className="w-10/12 mx-auto mb-10">{renderDrops()}</div>
       </div>
     </div>

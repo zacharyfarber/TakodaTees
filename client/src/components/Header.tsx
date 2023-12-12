@@ -9,7 +9,7 @@ function Header() {
   const searchRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="bg-black h-12 flex items-center">
+    <div className="bg-[#1E1E1E] h-14 flex items-center border-b border-[#F0F0F0]">
       <div className="navbar-start ml-2">
         <Link to="/">
           <LazyImage src={Logo} alt="Logo" className="h-12 w-12" />
@@ -21,7 +21,7 @@ function Header() {
       </div>
 
       <div className="navbar-end mr-2 flex items-center">
-        <div className="flex h-6 items-center bg-white border-white rounded-lg">
+        <div className="flex h-6 items-center bg-[#F0F0F0] border-[#F0F0F0] rounded-lg">
           <button className="m-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ function Header() {
 
           <input
             ref={searchRef}
-            className="border-white rounded-r-lg focus:outline-none"
+            className="border-[#F0F0F0] rounded-r-lg focus:outline-none"
           />
         </div>
 

@@ -73,8 +73,8 @@ function ProductSlider({
           <LazyImage
             src={image}
             alt={product.name}
-            className={`border-[1rem] border-black ${
-              type === 'recent-drops' ? 'bg-[#2F2F2F]' : 'bg-white'
+            className={`border-[1rem] border-[#1E1E1E] ${
+              type === 'recent-drops' ? 'bg-[#2F2F2F]' : 'bg-[#F0F0F0]'
             }`}
           />
         </div>

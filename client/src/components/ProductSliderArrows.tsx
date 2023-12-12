@@ -22,7 +22,7 @@ function ProductSliderArrows({
   const pathSettings = {
     fillRule: 'evenodd' as 'evenodd' | 'nonzero' | 'inherit' | undefined,
     clipRule: 'evenodd' as 'evenodd' | 'nonzero' | 'inherit' | undefined,
-    fill: type === 'recent-drops' ? '#FFFFFF' : '#000000'
+    fill: type === 'recent-drops' ? '#FFFFFF' : '#1E1E1E'
   };
 
   if (direction === 'left') {
