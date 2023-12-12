@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import Footer from './components/Footer';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import CartContext from './contexts/CartContext';
@@ -80,6 +81,8 @@ function App() {
                 element={<PrivateRoute component={<AdminProductEditPage />} />}
               />
             </Routes>
+
+            <Footer />
           </Router>
         </CartContext.Provider>
       </QueryClientProvider>
