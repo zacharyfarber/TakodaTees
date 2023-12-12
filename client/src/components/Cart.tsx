@@ -129,7 +129,7 @@ function Cart() {
                   counter % 2 === 0
                     ? 'bg-[#F0F0F0] text-[#1E1E1E]'
                     : 'bg-[#1E1E1E] text-[#F0F0F0]'
-                } px-2 h-[2rem] flex items-center text-2xl`}
+                } px-2 h-[2rem] flex items-center text-2xl w-[40%]`}
               >
                 {color}
               </p>
@@ -241,7 +241,7 @@ function Cart() {
         ref={cartRef}
         className={`${
           cartOpen ? '!visible' : '!hidden'
-        } absolute w-[99.5%] right-[.25%] bg-[#F0F0F0] top-12 z-50 border-t-[.5rem] border-[#F0F0F0]]`}
+        } absolute w-[99.5%] right-[.25%] bg-[#F0F0F0] top-14 z-50 border-t-[.5rem] border-[#F0F0F0]]`}
       >
         <div className="border-b-[.5rem] border-[#1E1E1E] border-x-[.5rem]">
           <div className="h-12 flex items-center border-[#1E1E1E] border-[.125rem]">
@@ -259,7 +259,7 @@ function Cart() {
 
           <div className="flex items-center justify-between border-[#1E1E1E] border-x-[.5rem]">
             <div
-              className={`w-[67.5%] overflow-y-scroll max-h-96 ${
+              className={`w-[67.5%] overflow-y-scroll max-h-[30rem] ${
                 cart.length > 0 ? '' : 'hide-scrollbar'
               }`}
             >

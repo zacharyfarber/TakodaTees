@@ -29,7 +29,7 @@ function App() {
   const [selectedSize, setSelectedSize] = useState('');
 
   return (
-    <div>
+    <div id="app" className={cartOpen ? 'cartBlur' : ''}>
       <QueryClientProvider client={queryClient}>
         <CartContext.Provider
           value={{ cartKey, setCartKey, cartOpen, setCartOpen }}

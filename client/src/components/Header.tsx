@@ -9,7 +9,7 @@ function Header() {
   const searchRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="bg-[#1E1E1E] h-14 flex items-center border-b border-[#F0F0F0]">
+    <header className="bg-[#1E1E1E] h-14 flex items-center border-b border-[#F0F0F0]">
       <div className="navbar-start ml-2">
         <Link to="/">
           <LazyImage src={Logo} alt="Logo" className="h-12 w-12" />
@@ -48,7 +48,7 @@ function Header() {
 
         <Cart />
       </div>
-    </div>
+    </header>
   );
 }
 
