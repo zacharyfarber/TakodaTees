@@ -239,8 +239,11 @@ function Cart() {
   }, [location]);
 
   return (
-    <div>
-      <div onMouseEnter={() => setCartOpen(true)} className="flex h-6 ml-5">
+    <div ref={cartRef}>
+      <div
+        onMouseEnter={() => setCartOpen(true)}
+        className="flex h-6 ml-5 hover:cursor-pointer"
+      >
         <CartIcon />
 
         <p className="text-[#F0F0F0]">{calculateProductCount()}</p>
@@ -248,7 +251,6 @@ function Cart() {
 
       <div
         key={cartKey}
-        ref={cartRef}
         className={`${
           cartOpen ? '!visible' : '!hidden'
         } absolute w-[99.5%] right-[.25%] bg-[#F0F0F0] top-14 z-50 border-t-[.5rem] border-[#F0F0F0]]`}
@@ -259,12 +261,14 @@ function Cart() {
 
             <p className="navbar-center font-nanum text-3xl">Cart Summary</p>
 
-            <button
-              onClick={() => setCartOpen(false)}
-              className="text-red-500 navbar-end text-right mr-5"
-            >
-              X
-            </button>
+            <div className="flex justify-end navbar-end">
+              <button
+                onClick={() => setCartOpen(false)}
+                className="text-red-500 text-right mr-5"
+              >
+                X
+              </button>
+            </div>
           </div>
 
           <div className="flex items-center justify-between border-[#1E1E1E] border-x-[.5rem]">
