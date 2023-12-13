@@ -1,6 +1,6 @@
 // Notes: When switching colors switch back to front image
 
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import Slider from 'react-slick';
 
 import ProductContext from '../contexts/ProductContext';
@@ -9,6 +9,8 @@ import LazyImage from './LazyImage';
 
 function ProductImages({ product }: { product: Product }) {
   const { selectedColor } = useContext(ProductContext)!;
+
+  const sliderRef = useRef<Slider>(null);
 
   const { name, images } = product;
 
@@ -62,9 +64,15 @@ function ProductImages({ product }: { product: Product }) {
     });
   };
 
+  useEffect(() => {
+    (sliderRef.current as Slider).slickGoTo(0);
+  }, [selectedColor]);
+
   return (
     <div>
-      <Slider {...sliderSettings}>{renderImages()}</Slider>
+      <Slider ref={sliderRef} {...sliderSettings}>
+        {renderImages()}
+      </Slider>
     </div>
   );
 }

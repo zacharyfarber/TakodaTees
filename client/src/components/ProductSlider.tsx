@@ -69,15 +69,19 @@ function ProductSlider({
           })[0];
 
       return (
-        <div key={product._id} onClick={() => handleViewProduct(product)}>
-          <LazyImage
-            src={image}
-            alt={product.name}
-            className={`border-[1rem] border-[#1E1E1E] ${
-              type === 'recent-drops' ? 'bg-[#2F2F2F]' : 'bg-[#F0F0F0]'
-            }`}
-          />
-        </div>
+        <button key={product._id} onClick={() => handleViewProduct(product)}>
+          <div className={type === 'related-products' ? 'p-1' : ''}>
+            <LazyImage
+              src={image}
+              alt={product.name}
+              className={
+                type === 'recent-drops'
+                  ? 'bg-[#2F2F2F] border-[1rem] border-[#1E1E1E]'
+                  : 'bg-[#F0F0F0] border-2 border-white'
+              }
+            />
+          </div>
+        </button>
       );
     });
   };

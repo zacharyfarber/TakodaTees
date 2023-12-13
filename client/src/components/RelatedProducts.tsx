@@ -28,8 +28,10 @@ function RelatedProducts({
     if (!drop) return;
 
     return (
-      <div>
-        <p>{drop.name}</p>
+      <div className="w-[130%] relative left-[-15%]">
+        <p className="flex items-center justify-center text-center mb-5 font-simonetta text-5xl">
+          {drop.name}
+        </p>
 
         <ProductSlider
           products={relatedProducts as Product[]}
