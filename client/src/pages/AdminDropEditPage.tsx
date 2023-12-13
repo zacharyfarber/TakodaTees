@@ -66,6 +66,13 @@ function AdminDropEditPage() {
             );
           })[0];
 
+      if (!image)
+        image = Object.values(product.images)[0]
+          .split(',')
+          .filter((image) => {
+            return image.includes('front');
+          })[0];
+
       return (
         <div key={product._id}>
           <p>{product.name}</p>

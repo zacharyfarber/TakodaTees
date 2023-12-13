@@ -58,6 +58,11 @@ function Cart() {
               image.includes('thumbnail') && !image.includes('color_thumbnail')
             );
           })[0];
+
+          if (!image)
+            image = images[color].split(',').filter((image) => {
+              return image.includes('front');
+            })[0];
         } else {
           image = Object.values(images)[0]
             .split(',')
@@ -67,6 +72,13 @@ function Cart() {
                 !image.includes('color_thumbnail')
               );
             })[0];
+
+          if (!image)
+            image = Object.values(images)[0]
+              .split(',')
+              .filter((image) => {
+                return image.includes('front');
+              })[0];
         }
       }
 

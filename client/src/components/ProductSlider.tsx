@@ -68,6 +68,13 @@ function ProductSlider({
             );
           })[0];
 
+      if (!image)
+        image = Object.values(product.images)[0]
+          .split(',')
+          .filter((image) => {
+            return image.includes('front');
+          })[0];
+
       return (
         <button key={product._id} onClick={() => handleViewProduct(product)}>
           <div className={type === 'related-products' ? 'p-1' : ''}>

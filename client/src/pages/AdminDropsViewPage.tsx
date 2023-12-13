@@ -70,6 +70,13 @@ function AdminDropsViewPage() {
                     );
                   })[0];
 
+              if (!image)
+                image = Object.values(product.images)[0]
+                  .split(',')
+                  .filter((image) => {
+                    return image.includes('front');
+                  })[0];
+
               return (
                 <LazyImage key={product._id} src={image} alt={product.name} />
               );
