@@ -21,6 +21,7 @@ import AdminDropsViewPage from './pages/AdminDropsViewPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminProductEditPage from './pages/AdminProductEditPage';
 import AdminProductsViewPage from './pages/AdminProductsViewPage';
+import CheckoutPage from './pages/CheckoutPage';
 import HomePage from './pages/HomePage';
 import ProductViewPage from './pages/ProductViewPage';
 
@@ -71,6 +72,11 @@ function App() {
                     <ProductViewPage />
                   </ProductContext.Provider>
                 }
+              />
+
+              <Route
+                path="/checkout/:checkoutPage"
+                element={<CheckoutPage />}
               />
 
               <Route path="/admin/login" element={<AdminLoginPage />} />
