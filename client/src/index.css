@@ -3,10 +3,26 @@
 @tailwind utilities;
 
 html,
-body {
+body,
+#root {
   margin-left: 0.125%;
   margin-right: 0.125%;
   background-color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  flex-grow: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .slick-dots {
