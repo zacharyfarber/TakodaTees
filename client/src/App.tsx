@@ -8,6 +8,8 @@ import {
   useLocation
 } from 'react-router-dom';
 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import Footer from './components/Footer';
@@ -27,6 +29,8 @@ import HomePage from './pages/HomePage';
 import ProductViewPage from './pages/ProductViewPage';
 
 const queryClient = new QueryClient();
+
+const stripePromise = loadStripe('your_publishable_key');
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -90,7 +94,9 @@ function App() {
                   <CheckoutContext.Provider
                     value={{ shippingForm, setShippingForm }}
                   >
-                    <CheckoutPage />
+                    <Elements stripe={stripePromise}>
+                      <CheckoutPage />
+                    </Elements>
                   </CheckoutContext.Provider>
                 }
               />

@@ -1,9 +1,10 @@
-// Notes: Make shipping, payment and review p tags into buttons. Persist data over refresh?
+// Notes: Make shipping, payment and review p tags into buttons. Persist data over refresh? Reset data when leaving checkout page?
 
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import CheckoutCheckIcon from '../components/CheckoutCheckIcon';
+import PaymentForm from '../components/PaymentForm';
 import ShippingForm from '../components/ShippingForm';
 import CheckoutContext from '../contexts/CheckoutContext';
 
@@ -62,14 +63,40 @@ function CheckoutPage() {
         </p>
       </div>
 
-      <div>
-        {checkoutPage === 'shipping' ? (
-          <ShippingForm setShippingFormStatus={setShippingFormStatus} />
-        ) : checkoutPage === 'payment' ? (
-          <p>Payment</p>
-        ) : (
-          <p>Review</p>
-        )}
+      <div className="flex justify-between h-[66vh]">
+        <div className="w-[33%] flex flex-col border-[#1E1E1E] border p-5 h-full">
+          {checkoutPage === 'shipping' ? (
+            <div>
+              <p className="text-center">Shipping Details</p>
+
+              <ShippingForm setShippingFormStatus={setShippingFormStatus} />
+            </div>
+          ) : checkoutPage === 'payment' ? (
+            <div>
+              <p className="text-center">Payment Details</p>
+
+              <PaymentForm setPaymentFormStatus={setPaymentFormStatus} />
+            </div>
+          ) : (
+            <p>Review</p>
+          )}
+        </div>
+
+        <div className="w-[66%] border-[#1E1E1E] border p-5 h-full">
+          <p>Order Summary</p>
+
+          <div>Render Cart</div>
+
+          <div>
+            <p>Subtotal</p>
+
+            <p>Tax</p>
+
+            <p>Shipping</p>
+
+            <p>Total</p>
+          </div>
+        </div>
       </div>
     </div>
   );

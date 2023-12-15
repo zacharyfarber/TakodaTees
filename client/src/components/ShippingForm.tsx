@@ -81,7 +81,7 @@ const ShippingForm = ({
       }}
     >
       {({ setFieldValue, values }) => (
-        <Form>
+        <Form className="flex flex-col gap-5">
           <Field name="name" type="text" />
           <ErrorMessage name="name" />
 
@@ -121,7 +121,7 @@ const ShippingForm = ({
           <Field name="zipcode" type="text" />
           <ErrorMessage name="zipcode" />
 
-          <button type="submit">Submit</button>
+          <button type="submit">Continue to Payment</button>
         </Form>
       )}
     </Formik>
