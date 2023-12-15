@@ -15,9 +15,35 @@ function Header() {
 
   const { setCartOpen } = useContext(CartContext)!;
 
-  const [, checkoutPage] = useState<'shipping' | 'payment' | 'confirmation'>(
-    'shipping'
-  );
+  const [historyStack, setHistoryStack] = useState(() => {
+    const savedHistory = sessionStorage.getItem('history');
+
+    return savedHistory ? JSON.parse(savedHistory) : [];
+  });
+
+  useEffect(() => {
+    setHistoryStack((prevHistory: string[]) => {
+      const newHistory = [...prevHistory, pathname];
+
+      sessionStorage.setItem('history', JSON.stringify(newHistory));
+
+      return newHistory;
+    });
+  }, [pathname]);
+
+  const handleBackClick = () => {
+    const lastNonCheckoutRoute = [...historyStack]
+      .reverse()
+      .find((route) => !route.includes('checkout'));
+
+    if (pathname.includes('checkout/shipping')) {
+      navigate(lastNonCheckoutRoute);
+    } else if (pathname.includes('checkout/payment')) {
+      navigate('/checkout/shipping');
+    } else if (pathname.includes('checkout/review')) {
+      navigate('/checkout/payment');
+    }
+  };
 
   useEffect(() => {
     setCartOpen(false);
@@ -69,15 +95,7 @@ function Header() {
       ) : (
         <div className="bg-black h-14 flex items-center border-b border-[#F0F0F0]">
           <div className="navbar-start ml-2">
-            <button
-              onClick={() => {
-                if (pathname.includes('shipping')) navigate(-1);
-
-                if (pathname.includes('payment')) checkoutPage('shipping');
-
-                if (pathname.includes('confirmation')) checkoutPage('payment');
-              }}
-            >
+            <button onClick={handleBackClick}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"

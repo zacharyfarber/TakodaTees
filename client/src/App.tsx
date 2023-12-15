@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import CartContext from './contexts/CartContext';
+import CheckoutContext from './contexts/CheckoutContext';
 import ProductContext from './contexts/ProductContext';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminDropEditPage from './pages/AdminDropEditPage';
@@ -43,6 +44,15 @@ function App() {
 
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+
+  const [shippingForm, setShippingForm] = useState({
+    name: '',
+    address: '',
+    city: '',
+    country: '',
+    state: '',
+    zipcode: ''
+  });
 
   return (
     <div id="app" className={cartOpen ? 'cartBlur' : ''}>
@@ -76,7 +86,13 @@ function App() {
 
               <Route
                 path="/checkout/:checkoutPage"
-                element={<CheckoutPage />}
+                element={
+                  <CheckoutContext.Provider
+                    value={{ shippingForm, setShippingForm }}
+                  >
+                    <CheckoutPage />
+                  </CheckoutContext.Provider>
+                }
               />
 
               <Route path="/admin/login" element={<AdminLoginPage />} />

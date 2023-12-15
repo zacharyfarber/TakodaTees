@@ -321,9 +321,11 @@ function Cart() {
                 </p>
               </div>
 
-              <div className="flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[45%] h-10 text-m mt-5">
-                <Link to="/checkout/shipping">Check Out</Link>
-              </div>
+              <Link to="/checkout/shipping">
+                <div className="flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[45%] h-10 text-m mt-5">
+                  Check Out
+                </div>
+              </Link>
             </div>
           </div>
         </div>

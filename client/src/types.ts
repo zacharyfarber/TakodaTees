@@ -57,3 +57,37 @@ export interface CartItemType {
   item: { product: Product; variant: Variant; color?: string; size?: string };
   count: number;
 }
+
+export interface State {
+  id: number;
+  name: string;
+  state_code: string;
+}
+
+export interface Country {
+  id: number;
+  name: string;
+  iso2: string;
+  states: State[];
+}
+
+export interface CheckoutContext {
+  shippingForm?: {
+    name: string;
+    address: string;
+    city: string;
+    state: string;
+    zipcode: string;
+    country: string;
+  };
+  setShippingForm?: React.Dispatch<
+    React.SetStateAction<{
+      name: string;
+      address: string;
+      city: string;
+      state: string;
+      zipcode: string;
+      country: string;
+    }>
+  >;
+}
