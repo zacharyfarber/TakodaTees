@@ -23,9 +23,11 @@ mongoose_1.default.connect(process.env.MONGO_URI);
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.use((0, cors_1.default)({
-    origin: config_1.corsOrigins
-}));
+const corsOptions = {
+    origin: config_1.corsOrigins,
+    optionsSuccessStatus: 200
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use('/admin', adminRoutes_1.default);
 app.use('/auth', authRoutes_1.default);
 app.use('/email', emailRoutes_1.default);
