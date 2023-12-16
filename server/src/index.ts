@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 
+import { corsOrigins } from './config';
 import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
 import printfulRoutes from './routes/printfulRoutes';
@@ -25,10 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: [
-      'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app',
-      'https://takoda-tees-server-git-main-zacharyfarber.vercel.app'
-    ]
+    origin: corsOrigins
   })
 );
 

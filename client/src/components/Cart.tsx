@@ -305,13 +305,15 @@ function Cart() {
               <div className="flex text-xl text-center">
                 <p className="ml-6 w-[35%] text-center">Subtotal</p>
 
-                <p className="ml-auto mr-6">${calculateCartSubtotal()}</p>
+                <p className="ml-auto mr-6">
+                  ${customToFixed(calculateCartSubtotal())}
+                </p>
               </div>
               <div className="flex text-xl text-center my-3">
                 <p className="ml-6 w-[35%] text-center">Estimated Tax</p>
 
                 <p className="ml-auto mr-6">
-                  ${parseFloat(customToFixed(calculateCartSubtotal() * 0.1))}
+                  ${customToFixed(calculateCartSubtotal() * 0.1)}
                 </p>
               </div>
 
@@ -320,8 +322,10 @@ function Cart() {
 
                 <p className="ml-auto mr-6">
                   $
-                  {calculateCartSubtotal() +
-                    parseFloat(customToFixed(calculateCartSubtotal() * 0.1))}
+                  {customToFixed(
+                    calculateCartSubtotal() +
+                      parseFloat(customToFixed(calculateCartSubtotal() * 0.1))
+                  )}
                 </p>
               </div>
               <button

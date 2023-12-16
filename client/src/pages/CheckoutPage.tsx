@@ -309,7 +309,10 @@ function CheckoutPage() {
                 <div className="flex items-center justify-between w-full">
                   <p className="my-1">TAX</p>
                   <p>
-                    ${parseFloat(customToFixed(calculateCartSubtotal() * 0.1))}
+                    $
+                    {customToFixed(
+                      parseFloat(customToFixed(calculateCartSubtotal() * 0.1))
+                    )}
                   </p>
                 </div>
 
@@ -323,19 +326,23 @@ function CheckoutPage() {
                   {shippingForm?.country === 'US' ? (
                     <p>
                       $
-                      {calculateCartSubtotal() +
-                        parseFloat(
-                          customToFixed(calculateCartSubtotal() * 0.1)
-                        )}
+                      {customToFixed(
+                        calculateCartSubtotal() +
+                          parseFloat(
+                            customToFixed(calculateCartSubtotal() * 0.1)
+                          )
+                      )}
                     </p>
                   ) : (
                     <p>
                       $
-                      {calculateCartSubtotal() +
-                        parseFloat(
-                          customToFixed(calculateCartSubtotal() * 0.1)
-                        ) +
-                        10}
+                      {customToFixed(
+                        calculateCartSubtotal() +
+                          parseFloat(
+                            customToFixed(calculateCartSubtotal() * 0.1)
+                          ) +
+                          10
+                      )}
                     </p>
                   )}
                 </div>

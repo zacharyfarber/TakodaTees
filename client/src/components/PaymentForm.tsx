@@ -1,3 +1,5 @@
+// Notes: Only allow payment with card for now. Add more payment methods later.
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
