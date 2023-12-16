@@ -38,7 +38,9 @@ function CheckoutPage() {
   useEffect(() => {
     if (!clientSecret)
       createPaymentIntent(
-        (calculateCartSubtotal() + calculateCartSubtotal() * 0.08) * 100
+        (calculateCartSubtotal() +
+          parseFloat((calculateCartSubtotal() * 0.13).toFixed(2))) *
+          100
       ).then((res) => {
         setClientSecret(res.clientSecret);
         console.log(res.clientSecret);

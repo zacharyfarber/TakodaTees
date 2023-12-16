@@ -309,7 +309,7 @@ function Cart() {
                 <p className="ml-6 w-[35%] text-center">Estimated Tax</p>
 
                 <p className="ml-auto mr-6">
-                  ${calculateCartSubtotal() * 0.08}
+                  ${parseFloat((calculateCartSubtotal() * 0.13).toFixed(2))}
                 </p>
               </div>
 
@@ -317,7 +317,9 @@ function Cart() {
                 <p className="ml-6 w-[35%] text-center">Total</p>
 
                 <p className="ml-auto mr-6">
-                  ${calculateCartSubtotal() + calculateCartSubtotal() * 0.08}
+                  $
+                  {calculateCartSubtotal() +
+                    parseFloat((calculateCartSubtotal() * 0.13).toFixed(2))}
                 </p>
               </div>
 
