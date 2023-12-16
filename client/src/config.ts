@@ -1,4 +1,4 @@
 export const apiUrl =
   import.meta.env.MODE === 'production'
-    ? 'http://localhost:5000'
+    ? 'takoda-tees-server.vercel.app'
     : 'http://localhost:5000';
