@@ -11,6 +11,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = require("./config");
 const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
+const emailRoutes_1 = __importDefault(require("./routes/emailRoutes"));
 const printfulRoutes_1 = __importDefault(require("./routes/printfulRoutes"));
 const storeRoutes_1 = __importDefault(require("./routes/storeRoutes"));
 const stripeRoutes_1 = __importDefault(require("./routes/stripeRoutes"));
@@ -25,8 +26,9 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
     origin: config_1.corsOrigins
 }));
-app.use('/auth', authRoutes_1.default);
 app.use('/admin', adminRoutes_1.default);
+app.use('/auth', authRoutes_1.default);
+app.use('/email', emailRoutes_1.default);
 app.use('/printful', printfulRoutes_1.default);
 app.use('/store', storeRoutes_1.default);
 app.use('/stripe', stripeRoutes_1.default);
