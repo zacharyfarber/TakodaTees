@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Logo from '../assets/images/logo.png';
 import CartContext from '../contexts/CartContext';
+import useCart from '../hooks/useCart';
 import Cart from './Cart';
 import LazyImage from './LazyImage';
 
@@ -13,6 +14,8 @@ function Header() {
 
   const navigate = useNavigate();
 
+  const { clearCart } = useCart();
+
   const { setCartOpen } = useContext(CartContext)!;
 
   const [historyStack, setHistoryStack] = useState(() => {
@@ -20,16 +23,6 @@ function Header() {
 
     return savedHistory ? JSON.parse(savedHistory) : [];
   });
-
-  useEffect(() => {
-    setHistoryStack((prevHistory: string[]) => {
-      const newHistory = [...prevHistory, pathname];
-
-      sessionStorage.setItem('history', JSON.stringify(newHistory));
-
-      return newHistory;
-    });
-  }, [pathname]);
 
   const handleBackClick = () => {
     const lastNonCheckoutRoute = [...historyStack]
@@ -47,7 +40,31 @@ function Header() {
   };
 
   useEffect(() => {
+    setHistoryStack((prevHistory: string[]) => {
+      const newHistory = [...prevHistory, pathname];
+
+      sessionStorage.setItem('history', JSON.stringify(newHistory));
+
+      return newHistory;
+    });
+  }, [pathname]);
+
+  useEffect(() => {
     setCartOpen(false);
+
+    const prevRoute1 = historyStack[historyStack.length - 1];
+
+    const prevRoute2 = historyStack[historyStack.length - 2];
+
+    if (
+      (prevRoute1 && prevRoute1.includes('checkout/review')) ||
+      (prevRoute2 && prevRoute2.includes('checkout/review'))
+    ) {
+      console.log('clearing cart');
+      clearCart();
+    }
+
+    console.log(historyStack);
   }, [pathname]);
 
   return (

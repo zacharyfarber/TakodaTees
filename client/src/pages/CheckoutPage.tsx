@@ -8,6 +8,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import { createPaymentIntent } from '../apis/stripeApi';
 import CheckoutCheckIcon from '../components/CheckoutCheckIcon';
+import CheckoutReview from '../components/CheckoutReview';
 import LazyImage from '../components/LazyImage';
 import PaymentForm from '../components/PaymentForm';
 import ShippingForm from '../components/ShippingForm';
@@ -91,6 +92,55 @@ function CheckoutPage() {
                 return image.includes('front');
               })[0];
         }
+      }
+
+      if (checkoutPage === 'review') {
+        return (
+          <div
+            key={variantName}
+            className="flex my-3 h-[6.25rem] items-center justify-between mr-5 font-nanum"
+          >
+            <div className="h-20 w-20 ml-5">
+              <LazyImage src={image} alt={variantName} />
+            </div>
+
+            <div className="mx-5 w-[55%]">
+              <p className="bg-[#1E1E1E] text-[#F0F0F0] mb-2 px-2 h-[2rem] flex items-center text-2xl">
+                {productName}
+              </p>
+
+              <div className="flex">
+                {color && (
+                  <p className="bg-[#1E1E1E] text-[#F0F0F0] px-2 h-[2rem] flex items-center text-2xl w-[40%] mr-[20%]">
+                    {color}
+                  </p>
+                )}
+
+                {size && (
+                  <p className="bg-[#1E1E1E] text-[#F0F0F0] px-2 h-[2rem] flex items-center text-2xl w-[40%]] flex-grow">
+                    {size.toLowerCase() === 's'
+                      ? 'Small'
+                      : size.toLowerCase() === 'm'
+                      ? 'Medium'
+                      : size.toLowerCase() === 'l'
+                      ? 'Large'
+                      : 'Extra Large'}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="w-[35%] flex justify-evenly">
+              <p className="bg-[#1E1E1E] text-[#F0F0F0] mx-5 text-5xl text-center h-[5rem] min-w-[5rem] flex items-center justify-center">
+                ${price * count}
+              </p>
+
+              <p className="bg-[#1E1E1E] text-[#F0F0F0] text-5xl text-center h-[5rem] w-[5rem] flex justify-center items-center">
+                {count}
+              </p>
+            </div>
+          </div>
+        );
       }
 
       return (
@@ -285,9 +335,24 @@ function CheckoutPage() {
                   <PaymentForm setPaymentFormStatus={setPaymentFormStatus} />
                 </div>
               ) : (
-                <p className="text-center font-nanum text-3xl underline underline-offset-8 mb-6">
-                  Review
-                </p>
+                <div>
+                  <p className="text-center font-nanum text-3xl underline underline-offset-8 mb-6">
+                    Confirmation
+                  </p>
+
+                  <div className="h-full flex items-center justify-center mb-5">
+                    <CheckoutReview />
+                  </div>
+
+                  <button
+                    className="flex items-center justify-center mx-auto bg-[#70c22d] p-2 rounded-lg hover:bg-[#8dca5c]"
+                    onClick={() => navigate('/')}
+                  >
+                    <div className="text-center h-10 w-48 font-nanum text-2xl text-[#F0F0F0] border flex items-center justify-center">
+                      Continue Shopping
+                    </div>
+                  </button>
+                </div>
               )}
             </div>
 
