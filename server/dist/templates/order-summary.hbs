@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Order Confirmation</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; padding: 0;
+      background-color: #f4f4f4; } .container { width: 80%; margin: auto;
+      overflow: hidden; } h1 { color: #333; text-align: center; padding: 20px 0;
+      } ul { list-style-type: none; padding: 0; } li { background-color: #fff;
+      margin-bottom: 10px; padding: 20px; border-radius: 5px; } p { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Thank you for your order!</h1>
+    <p>Here is a summary of your order:</p>
+    <ul>
+      {{#each items}}
+        <li>
+          <img
+            src='{{this.image}}'
+            alt='{{this.name}}'
+            style='width: 100px; height: 100px;'
+          />
+          <p>Item: {{this.name}}</p>
+          <p>Size: {{this.size}}</p>
+          <p>Quantity: {{this.quantity}}</p>
+          <p>Price: ${{this.price}}</p>
+        </li>
+      {{/each}}
+    </ul>
+    <p>Subtotal: ${{totalPrice}}</p>
+    <p>Shipping: ${{shipping}}</p>
+    <p>Tax: ${{tax}}</p>
+    <p>Grand Total: ${{grandTotal}}</p>
+  </body>
+</html>
