@@ -332,7 +332,10 @@ function CheckoutPage() {
                     Payment Details
                   </p>
 
-                  <PaymentForm setPaymentFormStatus={setPaymentFormStatus} />
+                  <PaymentForm
+                    setPaymentFormStatus={setPaymentFormStatus}
+                    shippingCost={shippingForm?.country === 'US' ? 0 : 10}
+                  />
                 </div>
               ) : (
                 <div>

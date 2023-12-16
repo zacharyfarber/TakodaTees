@@ -60,11 +60,8 @@ function Header() {
       (prevRoute1 && prevRoute1.includes('checkout/review')) ||
       (prevRoute2 && prevRoute2.includes('checkout/review'))
     ) {
-      console.log('clearing cart');
       clearCart();
     }
-
-    console.log(historyStack);
   }, [pathname]);
 
   return (
@@ -113,22 +110,24 @@ function Header() {
       ) : (
         <div className="bg-black h-14 flex items-center border-b border-[#F0F0F0]">
           <div className="navbar-start ml-2">
-            <button onClick={handleBackClick}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M25 10C23.8278 4.29768 18.7303 -8.18729e-07 12.6263 -5.51912e-07C5.65774 -2.47308e-07 -8.4795e-07 5.60116 -5.46392e-07 12.5C-2.44835e-07 19.3988 5.65774 25 12.6263 25C18.7303 25 23.8278 20.7023 25 15L13.8889 15L13.8889 18.1256L5.05051 12.5L13.8889 6.87558L13.8889 10L25 10Z"
-                  fill="#F0F0F0"
-                />
-              </svg>
-            </button>
+            {!pathname.includes('checkout/review') && (
+              <button onClick={handleBackClick}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  viewBox="0 0 25 25"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M25 10C23.8278 4.29768 18.7303 -8.18729e-07 12.6263 -5.51912e-07C5.65774 -2.47308e-07 -8.4795e-07 5.60116 -5.46392e-07 12.5C-2.44835e-07 19.3988 5.65774 25 12.6263 25C18.7303 25 23.8278 20.7023 25 15L13.8889 15L13.8889 18.1256L5.05051 12.5L13.8889 6.87558L13.8889 10L25 10Z"
+                    fill="#F0F0F0"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
 
           <div className="text-[#F0F0F0] font-libre font-bold text-5xl navbar-center">
