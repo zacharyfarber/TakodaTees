@@ -23,7 +23,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5000'] }));
+app.use(
+  cors({
+    origin: [
+      'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app/',
+      'https://takoda-tees-server-onb424jyf-zacharyfarber.vercel.app/'
+    ]
+  })
+);
 
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
