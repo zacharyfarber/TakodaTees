@@ -1,7 +1,7 @@
-// Notes: Fix cart closing when item is removed
+// Notes: Add clear cart button
 
 import { useContext, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import CartContext from '../contexts/CartContext';
 import useCart from '../hooks/useCart';
@@ -15,6 +15,8 @@ function Cart() {
   const { cartKey, cartOpen, setCartOpen } = useContext(CartContext)!;
 
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   const {
     calculateProductCount,
@@ -323,11 +325,19 @@ function Cart() {
                 </p>
               </div>
 
-              <Link to="/checkout/shipping">
-                <div className="flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[45%] h-10 text-m mt-5">
+              <div
+                className={`flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[45%] h-10 text-m mt-5 ${
+                  calculateCartSubtotal() === 0 && 'opacity-25 bg-[#d2d2d2]'
+                })}`}
+                aria-disabled
+              >
+                <button
+                  disabled={calculateCartSubtotal() === 0}
+                  onClick={() => navigate('/checkout/shipping')}
+                >
                   Check Out
-                </div>
-              </Link>
+                </button>
+              </div>
             </div>
           </div>
         </div>
