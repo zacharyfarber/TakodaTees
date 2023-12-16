@@ -6,8 +6,11 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts",
+    "vercel-build": "tsc",
+    "vercel-start": "node dist/index.js"
   },
+  "vercel-output-directory": "dist",
   "dependencies": {
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
