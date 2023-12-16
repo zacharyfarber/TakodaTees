@@ -8,6 +8,7 @@ import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
 import printfulRoutes from './routes/printfulRoutes';
 import storeRoutes from './routes/storeRoutes';
+import stripeRoutes from './routes/stripeRoutes';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/printful', printfulRoutes);
 app.use('/store', storeRoutes);
+app.use('/stripe', stripeRoutes);
 
 const PORT = process.env.PORT || 5000;
 

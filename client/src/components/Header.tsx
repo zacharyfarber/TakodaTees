@@ -36,12 +36,13 @@ function Header() {
       .reverse()
       .find((route) => !route.includes('checkout'));
 
-    if (pathname.includes('checkout/shipping')) {
+    if (
+      pathname.includes('checkout/shipping') ||
+      pathname.includes('checkout/review')
+    ) {
       navigate(lastNonCheckoutRoute);
     } else if (pathname.includes('checkout/payment')) {
       navigate('/checkout/shipping');
-    } else if (pathname.includes('checkout/review')) {
-      navigate('/checkout/payment');
     }
   };
 

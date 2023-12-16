@@ -17,7 +17,7 @@ function CheckoutPage() {
 
   const [paymentFormStatus, setPaymentFormStatus] = useState('incomplete');
 
-  const { shippingForm } = useContext(CheckoutContext)!;
+  const { shippingForm, setPaymentAmount } = useContext(CheckoutContext)!;
 
   useEffect(() => {
     if (!shippingForm || Object.values(shippingForm).some((value) => !value)) {
@@ -75,7 +75,10 @@ function CheckoutPage() {
             <div>
               <p className="text-center">Payment Details</p>
 
-              <PaymentForm setPaymentFormStatus={setPaymentFormStatus} />
+              <PaymentForm
+                setPaymentFormStatus={setPaymentFormStatus}
+                setPaymentAmount={setPaymentAmount}
+              />
             </div>
           ) : (
             <p>Review</p>

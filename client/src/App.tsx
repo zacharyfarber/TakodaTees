@@ -12,6 +12,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { createPaymentIntent } from './apis/stripeApi';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
@@ -28,9 +29,9 @@ import CheckoutPage from './pages/CheckoutPage';
 import HomePage from './pages/HomePage';
 import ProductViewPage from './pages/ProductViewPage';
 
-const queryClient = new QueryClient();
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
-const stripePromise = loadStripe('your_publishable_key');
+const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -57,6 +58,16 @@ function App() {
     state: '',
     zipcode: ''
   });
+
+  const [clientSecret, setClientSecret] = useState('');
+
+  const [paymentAmount, setPaymentAmount] = useState(50);
+
+  useEffect(() => {
+    createPaymentIntent(paymentAmount).then((res) => {
+      setClientSecret(res.clientSecret);
+    });
+  }, [paymentAmount]);
 
   return (
     <div id="app" className={cartOpen ? 'cartBlur' : ''}>
@@ -92,11 +103,17 @@ function App() {
                 path="/checkout/:checkoutPage"
                 element={
                   <CheckoutContext.Provider
-                    value={{ shippingForm, setShippingForm }}
+                    value={{ shippingForm, setShippingForm, setPaymentAmount }}
                   >
-                    <Elements stripe={stripePromise}>
-                      <CheckoutPage />
-                    </Elements>
+                    {stripePromise && clientSecret && (
+                      <Elements
+                        stripe={stripePromise}
+                        options={{ clientSecret }}
+                        key={clientSecret}
+                      >
+                        <CheckoutPage />
+                      </Elements>
+                    )}
                   </CheckoutContext.Provider>
                 }
               />
