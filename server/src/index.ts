@@ -25,11 +25,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
-  cors({
-    origin: corsOrigins
-  })
-);
+const corsOptions = {
+  origin: corsOrigins,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 app.use('/admin', adminRoutes);
 app.use('/auth', authRoutes);
