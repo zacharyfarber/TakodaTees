@@ -8,7 +8,8 @@ type Action =
   | { type: 'increase'; _id: string }
   | { type: 'decrease'; _id: string }
   | { type: 'update'; _id: string; count: number }
-  | { type: 'remove'; _id: string };
+  | { type: 'remove'; _id: string }
+  | { type: 'clear' };
 
 function cartReducer(state: State, action: Action): State {
   switch (action.type) {
@@ -32,6 +33,8 @@ function cartReducer(state: State, action: Action): State {
           ? { ...item, count: action.count }
           : item
       );
+    case 'clear':
+      return [];
     default:
       return state;
   }
@@ -106,6 +109,12 @@ function useCart() {
     }
   }
 
+  const clearCart = () => {
+    sessionStorage.removeItem('cart');
+
+    dispatch({ type: 'clear' });
+  };
+
   function updateCartItemQuantity(_id: string, quantity: number) {
     if (quantity < 1) {
       quantity = 1;
@@ -162,7 +171,8 @@ function useCart() {
     removeFromCart,
     updateCartItemQuantity,
     increaseCartItemQuantity,
-    decreaseCartItemQuantity
+    decreaseCartItemQuantity,
+    clearCart
   };
 }
 

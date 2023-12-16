@@ -62,3 +62,8 @@ export interface ProductData {
   keywords: string;
   drop: string;
 }
+
+export interface CartItemType {
+  item: { product: Product; variant: Variant; color?: string; size?: string };
+  count: number;
+}

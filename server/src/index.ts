@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import { corsOrigins } from './config';
 import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
+import emailRoutes from './routes/emailRoutes';
 import printfulRoutes from './routes/printfulRoutes';
 import storeRoutes from './routes/storeRoutes';
 import stripeRoutes from './routes/stripeRoutes';
@@ -30,8 +31,9 @@ app.use(
   })
 );
 
-app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
+app.use('/auth', authRoutes);
+app.use('/email', emailRoutes);
 app.use('/printful', printfulRoutes);
 app.use('/store', storeRoutes);
 app.use('/stripe', stripeRoutes);

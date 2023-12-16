@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -6,9 +6,12 @@ function Footer() {
       <div className="bg-black h-[5.25rem] flex items-center border-t border-[#F0F0F0] text-[#F0F0F0] justify-between">
         <div className="flex flex-col navbar-start items-start w-[20%] border-r-2 border-white h-full justify-center">
           <div className="flex flex-col font-libre text-base text-center mx-auto gap-1">
-            <Link to="/about">About</Link>
+            <p>About</p>
 
-            <Link to="/policies">Policies</Link>
+            <p>Policies</p>
+            {/* <Link to="/about">About</Link>
+
+            <Link to="/policies">Policies</Link> */}
           </div>
         </div>
 
