@@ -4,6 +4,12 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 
+import adminRoutes from './routes/adminRoutes';
+import authRoutes from './routes/authRoutes';
+import printfulRoutes from './routes/printfulRoutes';
+import storeRoutes from './routes/storeRoutes';
+import stripeRoutes from './routes/stripeRoutes';
+
 dotenv.config();
 
 if (!process.env.MONGO_URI) {
@@ -17,7 +23,20 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:5000'] }));
+app.use(
+  cors({
+    origin: [
+      'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app/',
+      'https://takoda-tees-server-onb424jyf-zacharyfarber.vercel.app/'
+    ]
+  })
+);
+
+app.use('/auth', authRoutes);
+app.use('/admin', adminRoutes);
+app.use('/printful', printfulRoutes);
+app.use('/store', storeRoutes);
+app.use('/stripe', stripeRoutes);
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,3 +1,91 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body,
+#root {
+  margin-left: 0.125%;
+  margin-right: 0.125%;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  flex-grow: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shippingFormInput {
+  width: 100%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  background-color: #d9d9d9;
+  height: 2.5rem;
+}
+
+footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.slick-dots {
+  position: initial !important;
+  width: auto !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.slick-dots li {
+  border: #1e1e1e solid 0.05em !important;
+  width: 6rem !important;
+  height: 6rem !important;
+}
+
+.cartBlur > *:not(.header) {
+  filter: blur(0.33rem) grayscale(1) invert(1) brightness(0.75) contrast(0.5);
+  pointer-events: none;
+}
+
+.cartBlur header {
+  filter: none !important;
+  pointer-events: auto !important;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.image-loader {
+  width: 3rem;
+  height: 3rem;
+  border: 0.3125rem solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
