@@ -70,6 +70,17 @@ const sendEmail = async (email, items, subtotal, shipping) => {
         html: htmlToSend
     };
     const emailTransporter = await createTransporter();
-    await emailTransporter.sendMail(mailOptions);
+    await new Promise((resolve, reject) => {
+        emailTransporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+                reject(error);
+            }
+            else {
+                console.log(info);
+                resolve(info);
+            }
+        });
+    });
 };
 exports.sendEmail = sendEmail;
