@@ -311,7 +311,7 @@ function Cart() {
                 <p className="ml-6 w-[35%] text-center">Estimated Tax</p>
 
                 <p className="ml-auto mr-6">
-                  ${parseFloat((calculateCartSubtotal() * 0.13).toFixed(2))}
+                  ${parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))}
                 </p>
               </div>
 
@@ -321,23 +321,19 @@ function Cart() {
                 <p className="ml-auto mr-6">
                   $
                   {calculateCartSubtotal() +
-                    parseFloat((calculateCartSubtotal() * 0.13).toFixed(2))}
+                    parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))}
                 </p>
               </div>
 
-              <div
+              <button
+                disabled={calculateCartSubtotal() === 0}
+                onClick={() => navigate('/checkout/shipping')}
                 className={`flex justify-center items-center mx-auto text-center bg-[#1E1E1E] text-[#F0F0F0] w-[45%] h-10 text-m mt-5 ${
                   calculateCartSubtotal() === 0 && 'opacity-25 bg-[#d2d2d2]'
                 })}`}
-                aria-disabled
               >
-                <button
-                  disabled={calculateCartSubtotal() === 0}
-                  onClick={() => navigate('/checkout/shipping')}
-                >
-                  Check Out
-                </button>
-              </div>
+                Check Out
+              </button>
             </div>
           </div>
         </div>

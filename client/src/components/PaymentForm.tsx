@@ -48,7 +48,10 @@ function PaymentForm({
       <form id="payment-form" onSubmit={handleSubmit}>
         <PaymentElement />
 
-        <button disabled={isProcessing}>
+        <button
+          disabled={isProcessing}
+          className="h-10 text-white mt-8 rounded-md bg-[#0570de] w-full"
+        >
           {isProcessing ? 'Processing...' : 'Place Order'}
         </button>
 

@@ -20,6 +20,14 @@ body,
   flex-direction: column;
 }
 
+.shippingFormInput {
+  width: 100%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  background-color: #d9d9d9;
+  height: 2.5rem;
+}
+
 footer {
   margin-top: auto;
   flex-shrink: 0;
