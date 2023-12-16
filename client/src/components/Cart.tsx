@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import CartContext from '../contexts/CartContext';
+import { customToFixed } from '../helpers';
 import useCart from '../hooks/useCart';
 import { CartItemType } from '../types';
 import CartIcon from './CartIcon';
@@ -306,12 +307,11 @@ function Cart() {
 
                 <p className="ml-auto mr-6">${calculateCartSubtotal()}</p>
               </div>
-
               <div className="flex text-xl text-center my-3">
                 <p className="ml-6 w-[35%] text-center">Estimated Tax</p>
 
                 <p className="ml-auto mr-6">
-                  ${parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))}
+                  ${parseFloat(customToFixed(calculateCartSubtotal() * 0.1))}
                 </p>
               </div>
 
@@ -321,10 +321,9 @@ function Cart() {
                 <p className="ml-auto mr-6">
                   $
                   {calculateCartSubtotal() +
-                    parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))}
+                    parseFloat(customToFixed(calculateCartSubtotal() * 0.1))}
                 </p>
               </div>
-
               <button
                 disabled={calculateCartSubtotal() === 0}
                 onClick={() => navigate('/checkout/shipping')}

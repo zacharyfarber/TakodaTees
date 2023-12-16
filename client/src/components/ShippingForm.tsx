@@ -124,7 +124,7 @@ const ShippingForm = ({
 
             <div className="relative">
               <Field
-                className="shippingFormInput pr-4 border-r-2 border-transparent"
+                className="shippingFormInput pr-4 border-r-2 border-transparent cursor-pointer"
                 as="select"
                 name="country"
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -151,7 +151,7 @@ const ShippingForm = ({
 
             <div className="relative">
               <Field
-                className="shippingFormInput"
+                className="shippingFormInput cursor-pointer"
                 as="select"
                 name="state"
                 disabled={!values.country}
