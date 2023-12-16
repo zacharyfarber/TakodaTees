@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
-      'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app/',
-      'https://takoda-tees-server-git-main-zacharyfarber.vercel.app/'
+      'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app',
+      'https://takoda-tees-server-git-main-zacharyfarber.vercel.app'
     ]
   })
 );
