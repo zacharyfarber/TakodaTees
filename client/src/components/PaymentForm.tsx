@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useElements, useStripe } from '@stripe/react-stripe-js';
 
-import useCart from '../hooks/useCart';
-
 function PaymentForm({
-  setPaymentFormStatus,
-  setPaymentAmount
+  setPaymentFormStatus
 }: {
   setPaymentFormStatus: React.Dispatch<React.SetStateAction<string>>;
-  setPaymentAmount: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -19,8 +15,6 @@ function PaymentForm({
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [message, setMessage] = useState('');
-
-  const { calculateCartSubtotal } = useCart();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,12 +42,6 @@ function PaymentForm({
 
     setIsProcessing(false);
   };
-
-  useEffect(() => {
-    setPaymentAmount(
-      (calculateCartSubtotal() + calculateCartSubtotal() * 0.08) * 100
-    );
-  }, []);
 
   return (
     <div>

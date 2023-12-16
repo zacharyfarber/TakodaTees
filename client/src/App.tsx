@@ -8,11 +8,8 @@ import {
   useLocation
 } from 'react-router-dom';
 
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { createPaymentIntent } from './apis/stripeApi';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
@@ -29,8 +26,6 @@ import CheckoutPage from './pages/CheckoutPage';
 import HomePage from './pages/HomePage';
 import ProductViewPage from './pages/ProductViewPage';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-
 const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
@@ -38,6 +33,22 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
+const ResetClientSecret = ({
+  clientSecret,
+  setClientSecret
+}: {
+  clientSecret: string;
+  setClientSecret: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (clientSecret && !pathname.includes('checkout')) setClientSecret('');
   }, [pathname]);
 
   return null;
@@ -61,14 +72,6 @@ function App() {
 
   const [clientSecret, setClientSecret] = useState('');
 
-  const [paymentAmount, setPaymentAmount] = useState(50);
-
-  useEffect(() => {
-    createPaymentIntent(paymentAmount).then((res) => {
-      setClientSecret(res.clientSecret);
-    });
-  }, [paymentAmount]);
-
   return (
     <div id="app" className={cartOpen ? 'cartBlur' : ''}>
       <QueryClientProvider client={queryClient}>
@@ -77,6 +80,11 @@ function App() {
         >
           <Router>
             <ScrollToTop />
+
+            <ResetClientSecret
+              clientSecret={clientSecret}
+              setClientSecret={setClientSecret}
+            />
 
             <Header />
 
@@ -103,17 +111,14 @@ function App() {
                 path="/checkout/:checkoutPage"
                 element={
                   <CheckoutContext.Provider
-                    value={{ shippingForm, setShippingForm, setPaymentAmount }}
+                    value={{
+                      shippingForm,
+                      setShippingForm,
+                      clientSecret,
+                      setClientSecret
+                    }}
                   >
-                    {stripePromise && clientSecret && (
-                      <Elements
-                        stripe={stripePromise}
-                        options={{ clientSecret }}
-                        key={clientSecret}
-                      >
-                        <CheckoutPage />
-                      </Elements>
-                    )}
+                    <CheckoutPage />
                   </CheckoutContext.Provider>
                 }
               />

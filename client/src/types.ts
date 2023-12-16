@@ -90,5 +90,6 @@ export interface CheckoutContext {
       country: string;
     }>
   >;
-  setPaymentAmount: React.Dispatch<React.SetStateAction<number>>;
+  clientSecret: string;
+  setClientSecret: React.Dispatch<React.SetStateAction<string>>;
 }
