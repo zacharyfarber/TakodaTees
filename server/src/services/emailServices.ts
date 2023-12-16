@@ -90,5 +90,15 @@ export const sendEmail = async (
 
   const emailTransporter = await createTransporter();
 
-  await emailTransporter.sendMail(mailOptions);
+  await new Promise((resolve, reject) => {
+    emailTransporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+      } else {
+        console.log(info);
+        resolve(info);
+      }
+    });
+  });
 };
