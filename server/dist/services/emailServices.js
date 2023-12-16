@@ -71,15 +71,12 @@ const sendEmail = async (email, items, subtotal, shipping) => {
     };
     const emailTransporter = await createTransporter();
     await new Promise((resolve, reject) => {
-        emailTransporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error(error);
-                reject(error);
-            }
-            else {
-                console.log(info);
-                resolve(info);
-            }
+        emailTransporter.sendMail(mailOptions).then((info) => {
+            console.log(info);
+            resolve(info);
+        }, (error) => {
+            console.error(error);
+            reject(error);
         });
     });
 };
