@@ -12,6 +12,7 @@ import LazyImage from '../components/LazyImage';
 import PaymentForm from '../components/PaymentForm';
 import ShippingForm from '../components/ShippingForm';
 import CheckoutContext from '../contexts/CheckoutContext';
+import { customToFixed } from '../helpers';
 import useCart from '../hooks/useCart';
 import { CartItemType } from '../types';
 
@@ -205,7 +206,7 @@ function CheckoutPage() {
       createPaymentIntent(
         (10 +
           calculateCartSubtotal() +
-          parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))) *
+          parseFloat(customToFixed(calculateCartSubtotal() * 0.1))) *
           100
       ).then((res) => {
         setClientSecret(res.clientSecret);
@@ -213,7 +214,7 @@ function CheckoutPage() {
     } else {
       createPaymentIntent(
         (calculateCartSubtotal() +
-          parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))) *
+          parseFloat(customToFixed(calculateCartSubtotal() * 0.1))) *
           100
       ).then((res) => {
         setClientSecret(res.clientSecret);
@@ -308,7 +309,10 @@ function CheckoutPage() {
                 <div className="flex items-center justify-between w-full">
                   <p className="my-1">TAX</p>
                   <p>
-                    ${parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))}
+                    $
+                    {customToFixed(
+                      parseFloat(customToFixed(calculateCartSubtotal() * 0.1))
+                    )}
                   </p>
                 </div>
 
@@ -322,15 +326,23 @@ function CheckoutPage() {
                   {shippingForm?.country === 'US' ? (
                     <p>
                       $
-                      {calculateCartSubtotal() +
-                        parseFloat((calculateCartSubtotal() * 0.1).toFixed(2))}
+                      {customToFixed(
+                        calculateCartSubtotal() +
+                          parseFloat(
+                            customToFixed(calculateCartSubtotal() * 0.1)
+                          )
+                      )}
                     </p>
                   ) : (
                     <p>
                       $
-                      {calculateCartSubtotal() +
-                        parseFloat((calculateCartSubtotal() * 0.1).toFixed(2)) +
-                        10}
+                      {customToFixed(
+                        calculateCartSubtotal() +
+                          parseFloat(
+                            customToFixed(calculateCartSubtotal() * 0.1)
+                          ) +
+                          10
+                      )}
                     </p>
                   )}
                 </div>

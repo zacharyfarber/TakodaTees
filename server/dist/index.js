@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const config_1 = require("./config");
 const adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const printfulRoutes_1 = __importDefault(require("./routes/printfulRoutes"));
@@ -22,10 +23,7 @@ const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
-    origin: [
-        'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app/',
-        'https://takoda-tees-server-onb424jyf-zacharyfarber.vercel.app/'
-    ]
+    origin: config_1.corsOrigins
 }));
 app.use('/auth', authRoutes_1.default);
 app.use('/admin', adminRoutes_1.default);
