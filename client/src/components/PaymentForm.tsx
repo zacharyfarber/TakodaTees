@@ -1,14 +1,16 @@
 // Notes: Only allow payment with card for now. Add more payment methods later.
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useElements, useStripe } from '@stripe/react-stripe-js';
 
 import { sendEmail } from '../apis/emailApi';
+import { placeOrder } from '../apis/printfulApi';
+import CheckoutContext from '../contexts/CheckoutContext';
 import useCart from '../hooks/useCart';
-import { CartItemType } from '../types';
+import { CartItemType, PrintfulOrderData } from '../types';
 
 function PaymentForm({
   setPaymentFormStatus,
@@ -22,6 +24,8 @@ function PaymentForm({
   const navigate = useNavigate();
 
   const { getCart, calculateCartSubtotal } = useCart();
+
+  const { shippingForm } = useContext(CheckoutContext)!;
 
   const cart = getCart();
 
@@ -64,6 +68,24 @@ function PaymentForm({
       setMessage(error.message as string);
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
       setPaymentFormStatus('complete');
+
+      const printfulOrderData: PrintfulOrderData = {
+        recipient: {
+          name: shippingForm!.name,
+          address1: shippingForm!.address,
+          city: shippingForm!.city,
+          state_code: shippingForm!.state,
+          country_code: shippingForm!.country,
+          zip: shippingForm!.zipcode,
+          email
+        },
+        items: cart.map((item: CartItemType) => ({
+          sync_variant_id: item.item.variant.printfulId,
+          quantity: item.count
+        }))
+      };
+
+      placeOrder(printfulOrderData);
 
       sendEmail(
         email,

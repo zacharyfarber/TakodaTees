@@ -26,7 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const corsOptions = {
-  origin: 'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app',
+  origin: 'http://localhost:3000',
+  // 'https://takoda-tees-client-git-dev-zacharyfarber.vercel.app',
   optionsSuccessStatus: 200
 };
 
