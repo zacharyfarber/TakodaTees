@@ -93,3 +93,19 @@ export interface CheckoutContext {
   clientSecret: string;
   setClientSecret: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface PrintfulOrderData {
+  recipient: {
+    name: string;
+    address1: string;
+    city: string;
+    state_code: string;
+    country_code: string;
+    zip: string;
+    email: string;
+  };
+  items: {
+    sync_variant_id: number;
+    quantity: number;
+  }[];
+}

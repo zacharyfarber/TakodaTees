@@ -6,6 +6,7 @@ import VariantModel from '../models/VariantModel';
 import {
   PrintfulCreateProductApiResponse,
   PrintfulGetProductApiResponse,
+  PrintfulOrderData,
   PrintfulSyncVariant
 } from '../types';
 
@@ -57,4 +58,18 @@ export const createProduct = async (
   await savedProduct.save();
 
   return savedProduct;
+};
+
+export const placeOrder = async (orderData: PrintfulOrderData) => {
+  const res = await axios.post('https://api.printful.com/orders', orderData, {
+    params: {
+      confirm: true
+    },
+    headers: {
+      Authorization: `Bearer ${process.env.PRINTFUL_TOKEN}`,
+      'X-PF-Store-Id': process.env.PRINTFUL_STORE_ID
+    }
+  });
+
+  return res.data;
 };
